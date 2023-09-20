@@ -98,24 +98,45 @@ To configure connection strings in your projects:
 This tutorial applies to all regardless of the processor they have: Intel/M1 and above. This text assumes that you have .NETCore installed because dotnet cli comes packaged with it. Moreover, before reading the rest of the text, make sure to download Docker and Azure Data Studio. 
 
 ### Docker (SQL Server Setup)
-SQL Server Management Studio is a windows application and it cannot be downloaded on Mac. To deal with that, MSFT, has created a docker image, that has MSSQL Server integrated into it. To set up Docker, lets follow these steps:
-#### First time setting up SQL Server using Docker
-1. Open up Docker
-   1. Make to go Settings -> Resources
-   2. Make sure to change the memory to atleast 4GB.
-2. Open a terminal
-3. Now cd into the directory that contians your solution.
-4. <pre><code>
-    $ docker pull mcr.microsoft.com/mssql/server:2019-latest
-    $ docker run -d --name [NameOfContainer] -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=[YourPassword]' -p 1433:1433 mcr.microsoft.com/mssql/server:2019-latest
-    $ mssql -u sa -p [YourPassword]</code></pre>
-5. Once you are done with Docker, then make sure to terminate the container through Docker's UI or through the command line like this:
-   1. <pre><code>$ docker kill [NameOfContainer]</code></pre>
+
+Since SQL Server Management Studio is a Windows application and not available on Mac, Microsoft has created a Docker image with MSSQL Server integrated into it. Follow these steps to set up Docker:
+
+#### First-time setup for SQL Server using Docker
+
+1. **Open Docker**:
+   - Launch Docker.
+
+2. **Allocate Memory**:
+   - Navigate to **Settings** -> **Resources** and allocate a minimum of 4GB of memory.
+
+3. **Open a Terminal**:
+   - Open a terminal.
+
+4. **Navigate to Your Solution Directory**:
+   - Use the `cd` command to navigate to the directory containing your solution.
+
+5. **Run the following commands**:
+   - Pull the SQL Server Docker image (for both Intel-based and M1-based Macs):
+     ```bash
+     $ docker pull mcr.microsoft.com/mssql/server:2019-latest
+     ```
+
+   - For **Intel-based Macs**:
+     ```bash
+     $ docker run -d --name [NameOfContainer] -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=[YourPassword]' -p 1433:1433 mcr.microsoft.com/mssql/server:2019-latest
+     ```
+
+   - For **M1-based Macs**:
+     ```bash
+     $ docker run -e "ACCEPT_EULA=1" -e "MSSQL_SA_PASSWORD=[YourPassword]" -e "MSSQL_PID=Developer" -e "MSSQL_USER=SA" -p 1433:1433 -d --name=sql mcr.microsoft.com/azure-sql-edge
+     ```
+
 ### Using Docker Again
 1. To turn our SQL Server, we need to turn on the Docker Container that we previously created. You can do that either through Docker's UI by pressing on the play button or you can do it in the terminal like this:
    1.  <pre><code>$ docker start [NameOfContainer]</code></pre>
 
-### Azure Data Studio (Connecting to our SQL Server)
+### Azure Data Studio (Connecting to our SQL Server):
+While Docker is running, Azure Data Studio needs to be running simultaneously as it will serve as the GUI of our database. 
 1. Make sure to download Azure Data Studio based of the specs that you have.
 2. Go to New -> New Connection
 3. Set the Input Type to Parameters
