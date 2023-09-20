@@ -240,7 +240,7 @@ To test the profile picture setup feature, follow these steps:
      ```
 
 4. **Log In with Fake Accounts**:
-   - Log in using one of the fake accounts created by "SacredBondFaker." You will both of these fake accounts in your local database. For example:
+   - Log in using one of the fake accounts created by "SacredBondFaker." You will have both of these fake accounts in your local database. For example:
      - Username: Colleen27@yahoo.com
      - Password: Welcome8890!
      - Alternatively, you can use the following fake account:
