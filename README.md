@@ -1,7 +1,7 @@
 # SacredBond Setup
 
-## First Step Nuget Packages Setup
-After cloning this repository, make sure to go to the SacredBond.App.sln. For the next steps, the aim is to install the required NuGet packages for each project in the solution. You should run the `dotnet restore` command in the respective directories of the projects to download the necessary packages defined in their `.csproj` files.
+## First Step Nuget Packages Setup:
+After cloning this repository, make sure to go to download **Visual Studio (VS)** and not **Visual Studio Code (VSC)**. After downloading, VS, open SacredBond.App.sln. For the next steps, the aim is to install the required NuGet packages for each project in the solution. You should run the `dotnet restore` command in the respective directories of the projects to download the necessary packages defined in their `.csproj` files.
 
 1. **SacredBond.App**:
    - Navigate to the "SacredBond.App" directory in your terminal.
