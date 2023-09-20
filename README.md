@@ -1,5 +1,7 @@
 # SacredBond Setup
-Before proceeding with the setup, make sure to install the required NuGet packages for each project in the solution. You should run the `dotnet restore` command in the respective directories of the projects to download the necessary packages defined in their `.csproj` files.
+
+## First Step Nuget Packages Setup
+After cloning this repository, make sure to go to the SacredBond.App.sln. For the next steps, the aim is to install the required NuGet packages for each project in the solution. You should run the `dotnet restore` command in the respective directories of the projects to download the necessary packages defined in their `.csproj` files.
 
 1. **SacredBond.App**:
    - Navigate to the "SacredBond.App" directory in your terminal.
@@ -32,8 +34,67 @@ Before proceeding with the setup, make sure to install the required NuGet packag
      cd SacredBondFaker
      dotnet restore
      ```
+## Setting Up SQL Server and SQL Server Management Studio (SSMS) on Windows
 
-## EFCore and SQL Server Set up for Mac Users
+This guide provides step-by-step instructions for setting up SQL Server, SQL Server Management Studio (SSMS), and connecting to a local database on a Windows PC.
+
+### Installing SQL Server
+
+1. **Download SQL Server**:
+   - Download SQL Server from the official Microsoft website.
+
+2. **Run the Installer**:
+   - Run the SQL Server installer.
+   - Follow the installer's instructions to configure the installation. Install the Database Engine Services and other features as needed.
+
+3. **Configure Installation**:
+   - During installation, you will be prompted to select an instance name, authentication method, and set the SA (System Administrator) password. Make note of these settings for later use.
+
+4. **Launch SQL Server Installation Center**:
+   - After installation, launch the SQL Server Installation Center from the Windows Start menu.
+
+5. **SQL Server Configuration Manager**:
+   - In the SQL Server Installation Center, click on "SQL Server Configuration Manager."
+   - Ensure that the SQL Server instance you installed is running. If not, right-click on it and select "Start."
+
+### Installing SQL Server Management Studio (SSMS)
+
+1. **Download SSMS**:
+   - Download SQL Server Management Studio (SSMS) from the official Microsoft website.
+
+2. **Run the SSMS Installer**:
+   - Run the SSMS installer.
+   - Follow the installer's instructions to complete the installation.
+
+### Connecting to a Local Database Using SSMS
+
+1. **Launch SQL Server Management Studio (SSMS)**:
+   - Open SQL Server Management Studio from the Windows Start menu.
+
+2. **Connect to SQL Server Instance**:
+   - In the "Connect to Server" window, provide the following information:
+     - **Server type**: Leave this as the default, "Database Engine."
+     - **Server name**: Enter the name or address of your SQL Server instance (e.g., `(local)` or `localhost` for a local instance).
+     - **Authentication**: Choose the appropriate authentication type (Windows Authentication or SQL Server Authentication).
+     - **Login**: Enter your Windows username or SQL Server login name.
+     - **Password**: Enter the SA (System Administrator) password you set during SQL Server installation.
+
+3. **Connect to the Database Engine**:
+   - Click the "Connect" button. If the connection is successful, you will be connected to the SQL Server Database Engine.
+
+### Configuring Connection Strings in Projects
+
+To configure connection strings in your projects:
+
+- **SacredBond.App**:
+   - Open the `appsettings.Development.json` file in the "SacredBond.App" project.
+   - Update the connection string to match the one you used to connect to your local SQL Server instance. Replace `[YourConnectionString]` with the actual connection string.
+
+- **SacredBondFaker**:
+   - Open the `appsettings.json` file in the "SacredBondFaker" project.
+   - Update the connection string to match the one you used to connect to your local SQL Server instance. Replace `[YourConnectionString]` with the actual connection string.
+
+## Third Step SQL Server Set up for Mac Users
 This tutorial applies to all regardless of the processor they have: Intel/M1 and above. This text assumes that you have .NETCore installed because dotnet cli comes packaged with it. Moreover, before reading the rest of the text, make sure to download Docker and Azure Data Studio. 
 
 ## Docker (SQL Server Setup)
