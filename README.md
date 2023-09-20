@@ -81,9 +81,9 @@ This guide provides step-by-step instructions for setting up SQL Server, SQL Ser
 
 3. **Connect to the Database Engine**:
    - Click the "Connect" button. If the connection is successful, you will be connected to the SQL Server Database Engine.
-
-## Third Step SQL Server Set up for Mac Users
-This tutorial applies to all regardless of the processor they have: Intel/M1 and above. This text assumes that you have .NETCore installed because dotnet cli comes packaged with it. Moreover, before reading the rest of the text, make sure to download Docker and Azure Data Studio. 
+After finishing this step go to the "Fourth Step".
+## Setting Up SQL Server and SQL Server Management Studio (SSMS) on Mac (Skip this step if you have a Windows PC and go to the "Fourth Step"):
+This tutorial applies to all regardless of the processor they have: Intel/M1 and above. This text assumes that you have .NET Core installed because dotnet cli comes packaged with it. SSMS is a Windows Applicaiton is not present on Mac. Microsoft has a docker image that can be used on Mac. Moreover, before reading the rest of the text, make sure to download **Docker** and **Azure Data Studio**. 
 
 ### Docker (SQL Server Setup)
 
