@@ -1,0 +1,56 @@
+﻿@model SacredBond.App.Models.Subscription.NewCardRegistrationViewModel
+<h1>Your Subscription is not active</h1>
+
+<p>Your subscription is not active due to various reasons. This could be due to insufficient funds, having an expired card on your account, or any other reason. As a result, we request that you use a credit card that is different to the one that is under your account.</p>
+
+
+<h2>Card Registration</h2>
+
+<form method="post" asp-action="NewCardRegistrationForm" asp-controller="Subscription">
+    <div class="mb-3">
+        <input asp-for="@Model.CardNumber" class="form-control" autocomplete="on" aria-required="true" />
+        <label asp-for="@Model.CardNumber"></label>
+        <span asp-validation-for="@Model.CardNumber" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <select asp-for="@Model.EXPMonth" class="form-select" autocomplete="on" aria-required="true">
+            <option selected></option>
+            <option value="1">01</option>
+            <option value="2">02</option>
+            <option value="3">03</option>
+            <option value="4">04</option>
+            <option value="5">05</option>
+            <option value="6">06</option>
+            <option value="7">07</option>
+            <option value="8">08</option>
+            <option value="9">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+        </select>
+        <label asp-for="@Model.EXPMonth"></label>
+        <span asp-validation-for="@Model.EXPMonth" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <select asp-for="@Model.EXPYear" class="form-select" autocomplete="on" aria-required="true">
+            <option selected></option>
+            @for (int i = DateTime.Today.Year; i <= DateTime.Today.Year + 10; i++)
+            {
+                <option value="@i">@i</option>
+            }
+        </select>
+        <label asp-for="@Model.EXPYear"></label>
+        <span asp-validation-for="@Model.EXPYear" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <input asp-for="@Model.CVC" class="form-control" autocomplete="on" aria-required="true" />
+        <label asp-for="@Model.CVC"></label>
+        <span asp-validation-for="@Model.CVC" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    <!-- Hidden input field -->
+    <input type="hidden" name="stripeCustomerId" value="@Model.stripeCustomerId" />
+
+</form>

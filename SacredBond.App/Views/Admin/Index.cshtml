@@ -1,0 +1,52 @@
+﻿@model SacredBond.App.Models.Admin.AdminViewModel
+@using SacredBond.App.Models.Admin
+@using SacredBond.Common.Enums
+
+@{
+    ViewData["Title"] = "Admin";
+}
+<div>
+    <div class="page-title-box">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <h1 class="page-title">Welcome @AppUser.Name to Sacred Bond!</h1>
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active" aria-current="page"><a href="@Url.Action("Index", "Admin")">Home</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <h3>Profiles:</h3>
+            <ul class="dashboard-list">
+                @foreach (var item in Model.ProfileCounts)
+                {
+                    <li class="dashboard-list-item bg-white shadow-sm border">
+                        <a href="@Url.Action("GetProfiles","Admin", new { reportType = item.Name })" class="dashboard-list-item-count">
+                            <img src="@($"/images/{item.Name.ToLower()}.png")" title="@($"{item.Name} Profiles")" />
+                            <h5>@item.Name</h5>
+                            <span>@item.Count</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <h3>Matches:</h3>
+            <ul class="dashboard-list">
+                @foreach (var match in Model.MatchesCounts)
+                {
+                    <li class="dashboard-list-item bg-white shadow-sm border">
+                        <a href="@Url.Action("GetMatches","Admin", new { status = match.Name })" class="dashboard-list-item-count">
+                            <img src="@($"/images/{match.Name.ToLower()}.png")" title="@($"{match.Name} Matches")" />
+                            <h5>@match.Name</h5>
+                            <span>@match.Count</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

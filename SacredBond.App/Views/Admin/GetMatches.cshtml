@@ -1,0 +1,151 @@
+﻿@model SacredBond.App.Models.Admin.DisplayedMatchesViewModel
+@using SacredBond.Common.Enums
+
+@{
+    ViewData["Title"] = Model.ReportType + " Matches";
+}
+<div class="mt-4">
+    <div class="page-title-box">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <h1 class="page-title">@ViewData["Title"]</h1>
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item" aria-current="page"><a href="@Url.Action("Index", "Admin")">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="@Url.Action("GetMatches", "Admin", new { reportType = Model.ReportType })">@ViewData["Title"]</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <!--Table of profiles-->
+    <div class="bg-white p-3 shadow-sm border widget">
+        @Html.HiddenFor(model => model.ReportType)
+        <div class="table-wrapper">
+            <table class="table table-striped" id="tblMatches">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-300">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        @Html.DisplayNameFor(model => model.Matches[0].MatchId)
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        @Html.DisplayNameFor(model => model.Matches[0].ProfileId)
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        @Html.DisplayNameFor(model => model.Matches[0].ProfileUserFullName)
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        @Html.DisplayNameFor(model => model.Matches[0].ProfileUserGender)
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        @Html.DisplayNameFor(model => model.Matches[0].ProfileUserEmail)
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        @Html.DisplayNameFor(model => model.Matches[0].ProfileUserPhone)
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        @Html.DisplayNameFor(model => model.Matches[0].SpouseId)
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        @Html.DisplayNameFor(Model => Model.Matches[0].SpouseUserFullName)
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        @Html.DisplayNameFor(model => model.Matches[0].SpouseUserGender)
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        @Html.DisplayNameFor(model => model.Matches[0].SpouseUserEmail)
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        @Html.DisplayNameFor(model => model.Matches[0].SpouseUserPhone)
+                    </th>
+                   @* <th scope="col" class="px-6 py-3">
+                        @Html.DisplayNameFor(Model => Model.Matches[0].Status)
+                    </th>*@
+                    <th scope="col" class="px-6 py-3">
+                        @Html.DisplayNameFor(Model => Model.Matches[0].StatusChangedDate)
+                    </th>
+                   @* @if (Model.ReportType == InterestedInStatus.Approved)
+                    {
+                        <th scope="col" class="px-6 py-3">
+                            @Html.DisplayNameFor(Model => Model.Matches[0].ApprovedDate)
+                        </th>
+                    }
+                    @if (Model.ReportType == InterestedInStatus.Rejected)
+                    {
+                        <th scope="col" class="px-6 py-3">
+                            @Html.DisplayNameFor(Model => Model.Matches[0].RejectedDate)
+                        </th>
+                    }*@
+                    <th scope="col" class="px-6 py-3">
+                        <span class="sr-only">Visit</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var reportType = '@Model.ReportType';
+
+
+            $('#tblMatches').DataTable({
+                //"proccessing": true,
+                "serverSide": true,
+                "ajax": {
+                    url: "/Admin/GetMatches",
+                    type: 'POST',
+                    data: {
+                        "reportType": reportType
+                    },
+                    "dataSrc": function (data) {
+                        return data.data;
+                    }
+                },
+                "columns": [
+                    { "data": "matchId", "name": "MatchId", "visible": false, "sortable": false },
+
+                    { "data": "profileId", "name": "ProfileId", "visible": false, "sortable": false },
+                    { "data": "profileUserFullName", "name": 'ProfileUserFullName' },
+                    {
+                        "data": "profileUserGender",
+                        "name": "ProfileUserGender",
+                        "render": function (data, type, row, meta) {
+                            return row.profileUserGender == '@((int)Genders.Male)' ?
+                                '@Genders.Male.ToString()' : '@Genders.Female.ToString()';
+                        }
+                    },
+                    { "data": "profileUserEmail", "name": 'ProfileUserEmail' },
+                    { "data": "profileUserPhone", "name": 'ProfileUserPhone' },
+
+                    { "data": "spouseId", "name": "SpouseId", "visible": false, "sortable": false },
+                    { "data": "spouseUserFullName", "name": 'SpouseUserFullName' },
+                    {
+                        "data": "spouseUserGender",
+                        "name": "SpouseUserGender",
+                        "render": function (data, type, row, meta) {
+                            return row.spouseUserGender == '@((int)Genders.Male)' ?
+                                '@Genders.Male.ToString()' : '@Genders.Female.ToString()';
+                        }
+                    },
+                    { "data": "spouseUserEmail", "name": 'SpouseUserEmail' },
+                    { "data": "spouseUserPhone", "name": 'SpouseUserPhone' },
+                    { "data": "statusChangedDate", "name": 'StatusChangedDate' },
+
+                    {
+                        "targets": -1,
+                        "render": function (data, type, row, meta) {
+                            return '<a href="/Admin/MatchMoreInfo?profileId=' + row.profileId + '&spouseId=' + row.spouseId + '">More Info</a>';
+                        },
+                        "sortable": false
+                    }
+                ],
+                "order": [[2, "desc"]]
+            });
+        });
+    </script>
+}

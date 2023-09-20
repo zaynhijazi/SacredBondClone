@@ -1,0 +1,25 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register confirmation";
+}
+
+@{
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <section class="mt-5 bg-white p-5 shadow-sm border">
+                <h2>@ViewData["Title"]</h2>
+                <hr />
+                <p>
+                    Your account has been successfully created. Please check your email to confirm your account.
+                </p>
+                <p>
+                    <a asp-page="./Login">Back to log in page</a>
+                </p>
+            </section>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+}
+

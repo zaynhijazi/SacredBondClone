@@ -1,0 +1,127 @@
+﻿@using SacredBond.Common.Enums
+@model SacredBond.App.Models.Admin.AdminProfileViewModel
+
+@{
+    ViewData["Title"] = Model.PersonalViewModel.FullName;
+    ViewData["Status"] = Model.PersonalViewModel.Status;
+}
+
+<div class="mt-4">
+    <div class="page-title-box">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <h1 class="page-title">@ViewData["Title"]</h1>
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item" aria-current="page"><a href="@Url.Action("Index", "Admin")">Home</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="@Url.Action("Index", "ProfileSearch", new { id = AppUser.Id })">Find a Match</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="@Url.Action("MoreInfo", "Admin", new { id = Model.PersonalViewModel.ProfileId })">@ViewData["Title"]</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <ul class="nav nav-tabs" id="more-info-nav" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab" aria-controls="info" aria-selected="true">
+                        <img src="/images/info.png" title="information"/>
+                        Information
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8 tab-content">
+            <div class="tab-pane active" id="info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
+                <partial name="../Shared/_ProfileMetaData.cshtml" model="@Model" />
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="p-3">
+                <div class="form-group mb-4">
+                    <div class="profile-timeline-item">
+                        <img src="/images/check.png" />
+                        <div class="profile-timeline-item-label">
+                            <div class="mr-auto">
+                                <h6 class="mb-0">Created</h6>
+                                <span>@Model.PersonalViewModel.CreateTime.ToShortDateString()</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <div class="profile-timeline-item">
+                        @if (Model.PersonalViewModel.SubmittedDate.HasValue)
+                        {
+                            <img src="/images/check.png" />
+                        }
+                        else
+                        {
+                            <img src="/images/unknown.png" />
+                        }
+                        <div class="profile-timeline-item-label">
+                            <div class="mr-auto">
+                                <h6 class="mb-0">Submitted</h6>
+                                @if (Model.PersonalViewModel.SubmittedDate.HasValue)
+                                {
+                                    <span>@Model.PersonalViewModel.SubmittedDate.Value.ToShortDateString()</span>
+                                }
+                                else
+                                {
+                                    <span>--/--/----</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <div class="profile-timeline-item">
+                        @if (Model.PersonalViewModel.ApprovedDate.HasValue)
+                        {
+                            <img src="/images/check.png" />
+                        }
+                        else
+                        {
+                            <img src="/images/unknown.png" />
+                        }
+                        <div class="profile-timeline-item-label">
+                            <div class="mr-auto">
+                                <h6 class="mb-0">Approved</h6>
+                                @if (Model.PersonalViewModel.ApprovedDate.HasValue)
+                                {
+                                    <span>@Model.PersonalViewModel.ApprovedDate.Value.ToShortDateString()</span>
+                                }
+                                else
+                                {
+                                    <span>--/--/----</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+            $("#meta-data").disableInput();
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

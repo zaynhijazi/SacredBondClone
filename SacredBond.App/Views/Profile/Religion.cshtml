@@ -1,0 +1,95 @@
+﻿@using SacredBond.Common.Enums
+@model SacredBond.App.Models.Profile.ReligionViewModel
+@{
+    ViewData["Title"] = "Religious Outlook and Practices";
+}
+
+<form id="ReligionForm" method="post">
+    <input asp-for="ProfileId" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-floating">
+                <textarea required asp-for="ReligionImportance" class="form-control" rows="5" autocomplete="on" aria-required="true"></textarea>
+                <label asp-for="ReligionImportance"></label>
+                <span asp-validation-for="ReligionImportance" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="DoYouPray5Times" type="text" id="has-child" class="form-select" autocomplete="on">
+                    <option selected></option>
+                    <option id="child-yes" value="true">Yes</option>
+                    <option id="child-no" value="false">No</option>
+                </select>
+                <label asp-for="DoYouPray5Times"></label>
+                <span asp-validation-for="DoYouPray5Times" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.Gender == Genders.Female)
+    {
+        <div class="row">
+            <div class="col-6">
+                <div class="form-floating">
+                    <select required asp-for="WearsHijab" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<WearsHijabOptions>()">
+                        aria-required="true">
+                        <option selected></option>
+                    </select>
+                    <label asp-for="WearsHijab"></label>
+                    <span asp-validation-for="WearsHijab" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    }
+    else{
+        <div class="row">
+            <div class="col-6">
+                <div class="form-floating">
+                    <select required asp-for="HasBeard" type="text" id="has-child" class="form-select" autocomplete="on">
+                        <option selected></option>
+                        <option id="child-yes" value="true">Yes</option>
+                        <option id="child-no" value="false">No</option>
+                    </select>
+                    <label asp-for="HasBeard"></label>
+                    <span asp-validation-for="HasBeard" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    }
+
+    <hr />
+    <div class="row">
+        <div class="col-3">
+            <a href="@Url.Action("Marital", "Profile", new { id = Model.ProfileId})" class="w-100 btn btn-md btn-primary">Back</a>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-3">
+            @if (Model.CanEditProfile)
+            {
+                <button id="save" type="submit" class="w-100 btn btn-md btn-primary">Save & Continue</button>
+            }
+            else
+            {
+                <button id="continue" type="submit" class="w-100 btn btn-md btn-primary">Continue</button>
+            }
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            $("#religionLink").addClass("active");
+            if (!@Model.CanEditProfile.ToString().ToLower()) {
+                $("#ReligionForm").disableInput();
+            }
+        });
+    </script>
+}

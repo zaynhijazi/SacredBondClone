@@ -1,0 +1,161 @@
+﻿@model SacredBond.App.Models.Admin.DisplayedProfilesViewModel
+@using SacredBond.Common.Enums
+
+@{
+    ViewData["Title"] = Model.ReportType + " Profiles";
+    var prop = "statusChangedDate";
+    var name = "StatusChangedDate";
+    if (Model.ReportType == ProfileStatus.Submitted)
+    {
+        prop = "submittedDate";
+        name = "SubmittedDate";
+    }
+    else if (Model.ReportType == ProfileStatus.Rejected)
+    {
+        prop = "rejectedDate";
+        name = "RejectedDate";
+    }
+    else if (Model.ReportType == ProfileStatus.Approved)
+    {
+        prop = "spprovedDate";
+        name = "ApprovedDate";
+    }
+}
+<div class="mt-4">
+    <div class="page-title-box">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <h1 class="page-title">@ViewData["Title"]</h1>
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item" aria-current="page"><a href="@Url.Action("Index", "Admin")">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="@Url.Action("GetProfiles", "Admin", new { reportType = Model.ReportType })">@ViewData["Title"]</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <!--Table of profiles-->
+
+    <div class="bg-white p-3 shadow-sm border widget">
+        @Html.HiddenFor(model => model.ReportType)
+        <div class="table-wrapper">
+            <table class="table table-striped" id="tblProfiles">
+                <thead>
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            @Html.DisplayNameFor(model => model.AdminProfiles[0].PersonalViewModel.ProfileId)
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            @Html.DisplayNameFor(model => model.AdminProfiles[0].PersonalViewModel.FullName)
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            @Html.DisplayNameFor(Model => Model.AdminProfiles[0].PersonalViewModel.Gender)
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            @Html.DisplayNameFor(Model => Model.AdminProfiles[0].PersonalViewModel.Phone)
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            @Html.DisplayNameFor(Model => Model.AdminProfiles[0].PersonalViewModel.Email)
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            @Html.DisplayNameFor(Model => Model.AdminProfiles[0].PersonalViewModel.CreateTime)
+                        </th>
+                        @if (Model.ReportType == ProfileStatus.Pending)
+                        {
+                            <th scope="col" class="px-6 py-3">
+                                @Html.DisplayNameFor(Model => Model.AdminProfiles[0].PersonalViewModel.StatusChangedDate)
+                            </th>
+                        }
+                        else if (Model.ReportType == ProfileStatus.Submitted)
+                        {
+                            <th scope="col" class="px-6 py-3">
+                                @Html.DisplayNameFor(Model => Model.AdminProfiles[0].PersonalViewModel.SubmittedDate)
+                            </th>
+                        }
+                        else if (Model.ReportType == ProfileStatus.Rejected)
+                        {
+                            <th scope="col" class="px-6 py-3">
+                                @Html.DisplayNameFor(Model => Model.AdminProfiles[0].PersonalViewModel.RejectedDate)
+                            </th>
+                        }
+                        else if (Model.ReportType == ProfileStatus.Approved)
+                        {
+                            <th scope="col" class="px-6 py-3">
+                                @Html.DisplayNameFor(Model => Model.AdminProfiles[0].PersonalViewModel.ApprovedDate)
+                            </th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var reportType = '@Model.ReportType';
+
+            $('#tblProfiles').DataTable({
+                "responsive": true,
+                "serverSide": true,
+                "ajax": {
+                    url: "/Admin/GetProfiles",
+                    type: 'POST',
+                    data: {
+                        "reportType": reportType
+                    },
+                    "dataSrc": function (data) {
+                        return data.data;
+                    }
+                },
+                "columns": [
+                    { "data": "personalViewModel.profileId", "name": "ProfileId", "visible": false, "sortable": false },
+                    {
+                        "data": "personalViewModel.fullName",
+                        "name": 'FullName',
+                        "render": function (data, type, row, meta) {
+                            return '<a href="/Admin/MoreInfo?profileId=' + row.personalViewModel.profileId + '">' + row.personalViewModel.fullName + '</a>';
+                        },
+                    },
+                    {
+                        "data": "personalViewModel.gender",
+                        "name": "GenderName",
+                        "render": function (data, type, row, meta) {
+                            return row.personalViewModel.gender == '@((int)Genders.Male)' ?
+                                '@Genders.Male.ToString()' : '@Genders.Female.ToString()';
+                        }
+                    },
+                    { "data": "personalViewModel.phone", "name": "PhoneNumber" },
+                    { "data": "personalViewModel.email", "name": "Email" },
+                    {
+                        "data": "personalViewModel.createTime",
+                        "name": "CreateTime",
+                        "render": function (data) {
+                            var date = new Date(data);
+                            var month = date.getMonth() + 1;
+                            return (month.toString().length > 1 ? month : "0" + month) + "/" + date.getDate() + "/" + date.getFullYear();
+                        }
+                    },
+                    {
+                        "data": "personalViewModel.@prop",
+                        "name": "@name",
+                        "render": function (data) {
+                            
+                            var date = new Date(data);
+                            console.log(date);
+                            if (date != "Invalid Date") {
+                                var month = date.getMonth() + 1;
+                                return (month.toString().length > 1 ? month : "0" + month) + "/" + date.getDate() + "/" + date.getFullYear();
+                            }
+                            return "";
+                        }
+                    },
+                ],
+                "order": [[0, "desc"]]
+            });
+        });
+    </script>
+}

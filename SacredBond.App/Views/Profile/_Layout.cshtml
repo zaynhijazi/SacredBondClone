@@ -1,0 +1,152 @@
+﻿@model SacredBond.App.Models.Profile.BaseProfileViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-title-box">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h1 class="page-title">My Profile</h1>
+            <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="@Url.Action("Index", "Profile")">My Profile</a></li>
+            </ol>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <section class="bg-white p-3 shadow-sm border widget">
+            <h4 class="widget-title">
+                <img src="/images/steps.png" title="Profile" />
+                Steps
+            </h4>
+            <ol class="profile-list">
+                <li class="profile-list-item" id="personalLink">
+                    <div class="profile-list-item-list">
+                        <a href="@Url.Action("Personal","Profile", new { id = Model.ProfileId })" class="title">Personal information</a>
+                    </div>
+                </li>
+                <li class="profile-list-item" id="picturesLink">
+                    <div class="profile-list-item-list">
+                        <a href="@Url.Action("ProfilePictures","Profile", new { id = Model.ProfileId })" class="title">Profile Picture Setup</a>
+                    </div>
+                </li>
+                <li class="profile-list-item" id="educationalLink">
+                    <div class="profile-list-item-list">
+                        <a href="@Url.Action("EducationalProfessional","Profile", new { id = Model.ProfileId })" class="title">Educational & Professional</a>
+                    </div>
+                </li>
+                <li class="profile-list-item" id="maritalLink">
+                    <div class="profile-list-item-list">
+                        <a href="@Url.Action("Marital","Profile", new { id = Model.ProfileId })" class="title">Marital & Family</a>
+                    </div>
+                </li>
+                <li class="profile-list-item" id="religionLink">
+                    <div class="profile-list-item-list">
+                        <a href="@Url.Action("Religion","Profile", new { id = Model.ProfileId })" class="title">Religious Outlook & Practices</a>
+                    </div>
+                </li>
+                <li class="profile-list-item" id="aboutLink">
+                    <div class="profile-list-item-list">
+                        <a href="@Url.Action("About","Profile", new { id = Model.ProfileId })" class="title">About Yourself</a>
+                    </div>
+                </li>
+                <li class="profile-list-item" id="spouseLink">
+                    <div class="profile-list-item-list">
+                        <a href="@Url.Action("Spouse","Profile", new { id = Model.ProfileId })" class="title">Spouse</a>
+                    </div>
+                </li>
+                <li class="profile-list-item" id="healthLink">
+                    <div class="profile-list-item-list">
+                        <a href="@Url.Action("Health","Profile", new { id = Model.ProfileId })" class="title">Health</a>
+                    </div>
+                </li>
+                <li class="profile-list-item" id="familyLink">
+                    <div class="profile-list-item-list">
+                        <a href="@Url.Action("Family","Profile", new { id = Model.ProfileId })" class="title">Family</a>
+                    </div>
+                </li>
+                <li class="profile-list-item" id="financeLink">
+                    <div class="profile-list-item-list">
+                        <a href="@Url.Action("Finance","Profile", new { id = Model.ProfileId })" class="title">Finance</a>
+                    </div>
+                </li>
+                <li class="profile-list-item" id="contactLink">
+                    <div class="profile-list-item-list">
+                        <a href="@Url.Action("Contact","Profile", new { id = Model.ProfileId })" class="title">Communication</a>
+                    </div>
+                </li>
+                <li class="profile-list-item" id="summaryLink">
+                    <div class="profile-list-item-list">
+                        <a href="@Url.Action("Summary","Profile", new { id = Model.ProfileId })" class="title">Summary</a>
+                    </div>
+                </li>
+            </ol>
+        </section>
+    </div>
+    <div class="col-md-9">
+        <section class="bg-white p-3 shadow-sm border widget">
+            <h4 class="widget-title">
+                @ViewData["Title"]
+            </h4>
+            <hr />
+            <div>
+                @RenderBody()
+                @RenderSection("scripts", required: false)
+            </div>
+        </section>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+            if ('@Model.IsPersonalCompleted' == 'True') {
+                $("#personalLink").addClass("completed");
+            }
+            if ('@Model.IsPicturesCompleted' == 'True') {
+                $("#picturesLink").addClass("completed");
+            }
+            if ('@Model.IsEducationalProfessionalCompleted' == 'True') {
+                $("#educationalLink").addClass("completed");
+            }
+
+            if ('@Model.IsMaritalCompleted' == 'True') {
+                $("#maritalLink").addClass("completed");
+            }
+
+            if ('@Model.IsReligionCompleted' == 'True') {
+                $("#religionLink").addClass("completed");
+            }
+
+            if ('@Model.IsAboutCompleted' == 'True') {
+                $("#aboutLink").addClass("completed");
+            }
+
+            if ('@Model.IsSpouseCompleted' == 'True') {
+                $("#spouseLink").addClass("completed");
+            }
+
+            if ('@Model.IsHealthCompleted' == 'True') {
+                $("#healthLink").addClass("completed");
+            }
+
+            if ('@Model.IsFinanceCompleted' == 'True') {
+                $("#financeLink").addClass("completed");
+            }
+
+            if ('@Model.IsFamilyCompleted' == 'True') {
+                $("#familyLink").addClass("completed");
+            }
+
+            if ('@Model.IsContactCompleted' == 'True') {
+                $("#contactLink").addClass("completed");
+            }
+        });
+    </script>
+}

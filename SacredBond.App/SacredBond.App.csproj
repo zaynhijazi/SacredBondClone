@@ -1,0 +1,150 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-SacredBond.App-3bbe9216-3f91-47ef-ac58-06fb55bef436</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.14" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.15" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.15">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="X.PagedList.Mvc" Version="8.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SacredBond.Core\SacredBond.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Views\Subscription\" />
+    <None Remove="Models\Subscription\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\lib\chart.js\auto\auto.cjs" />
+    <None Include="wwwroot\lib\chart.js\auto\auto.d.ts" />
+    <None Include="wwwroot\lib\chart.js\auto\auto.js" />
+    <None Include="wwwroot\lib\chart.js\dist\chart.cjs" />
+    <None Include="wwwroot\lib\chart.js\dist\chart.cjs.map" />
+    <None Include="wwwroot\lib\chart.js\dist\chart.js" />
+    <None Include="wwwroot\lib\chart.js\dist\chart.js.map" />
+    <None Include="wwwroot\lib\chart.js\dist\chart.umd.js" />
+    <None Include="wwwroot\lib\chart.js\dist\chart.umd.js.map" />
+    <None Include="wwwroot\lib\chart.js\dist\chunks\helpers.segment.cjs" />
+    <None Include="wwwroot\lib\chart.js\dist\chunks\helpers.segment.cjs.map" />
+    <None Include="wwwroot\lib\chart.js\dist\chunks\helpers.segment.js" />
+    <None Include="wwwroot\lib\chart.js\dist\chunks\helpers.segment.js.map" />
+    <None Include="wwwroot\lib\chart.js\dist\controllers\controller.bar.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\controllers\controller.bubble.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\controllers\controller.doughnut.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\controllers\controller.line.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\controllers\controller.pie.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\controllers\controller.polarArea.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\controllers\controller.radar.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\controllers\controller.scatter.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\controllers\index.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\core.adapters.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\core.animation.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\core.animations.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\core.animations.defaults.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\core.animator.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\core.config.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\core.controller.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\core.datasetController.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\core.defaults.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\core.element.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\core.interaction.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\core.layouts.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\core.layouts.defaults.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\core.plugins.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\core.registry.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\core.scale.autoskip.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\core.scale.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\core.scale.defaults.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\core.ticks.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\core.typedRegistry.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\core\index.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\elements\element.arc.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\elements\element.bar.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\elements\element.line.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\elements\element.point.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\elements\index.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers.cjs" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers.cjs.map" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers.js" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers.js.map" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers\helpers.canvas.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers\helpers.collection.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers\helpers.color.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers\helpers.config.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers\helpers.config.types.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers\helpers.core.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers\helpers.curve.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers\helpers.dom.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers\helpers.easing.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers\helpers.extras.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers\helpers.interpolation.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers\helpers.intl.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers\helpers.math.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers\helpers.options.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers\helpers.rtl.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers\helpers.segment.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\helpers\index.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\index.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\index.umd.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\platform\index.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\platform\platform.base.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\platform\platform.basic.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\platform\platform.dom.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\plugins\index.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\plugins\plugin.colors.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\plugins\plugin.decimation.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\plugins\plugin.filler\filler.drawing.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\plugins\plugin.filler\filler.helper.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\plugins\plugin.filler\filler.options.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\plugins\plugin.filler\filler.segment.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\plugins\plugin.filler\filler.target.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\plugins\plugin.filler\filler.target.stack.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\plugins\plugin.filler\index.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\plugins\plugin.filler\simpleArc.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\plugins\plugin.legend.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\plugins\plugin.subtitle.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\plugins\plugin.title.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\plugins\plugin.tooltip.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\scales\index.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\scales\scale.category.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\scales\scale.linear.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\scales\scale.linearbase.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\scales\scale.logarithmic.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\scales\scale.radialLinear.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\scales\scale.time.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\scales\scale.timeseries.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\types.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\types\animation.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\types\basic.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\types\color.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\types\geometric.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\types\index.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\types\layout.d.ts" />
+    <None Include="wwwroot\lib\chart.js\dist\types\utils.d.ts" />
+    <None Include="wwwroot\lib\chart.js\helpers\helpers.cjs" />
+    <None Include="wwwroot\lib\chart.js\helpers\helpers.d.ts" />
+    <None Include="wwwroot\lib\chart.js\helpers\helpers.js" />
+    <None Include="wwwroot\lib\chart.js\LICENSE.md" />
+    <None Include="wwwroot\lib\chart.js\README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Subscription\" />
+    <Folder Include="Models\Subscription\" />
+  </ItemGroup>
+</Project>

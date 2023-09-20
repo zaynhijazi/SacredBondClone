@@ -1,0 +1,595 @@
+﻿@using SacredBond.App.Models.Admin
+@using SacredBond.Common.Enums;
+@using SacredBond.App.Models.ProfileSearch;
+@model SearchViewModel
+
+<div class="page-title-box">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h1 class="page-title">My Profile</h1>
+            <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="@Url.Action("Index", "ProfileSearch")">Find a Match</a></li>
+            </ol>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+
+<form id="filtersForm" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    @Html.HiddenFor(model => model.PageNumber)
+    <div class="row">
+        <div class="col-3">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-personal-tab" data-bs-toggle="pill" href="#v-pills-personal" role="tab" aria-controls="v-pills-personal" aria-selected="true">Personal</a>
+                <a class="nav-link" id="v-pills-education-tab" data-bs-toggle="pill" href="#v-pills-education" role="tab" aria-controls="v-pills-education" aria-selected="false">Education</a>
+                <a class="nav-link" id="v-pills-marital-tab" data-bs-toggle="pill" href="#v-pills-marital" role="tab" aria-controls="v-pills-marital" aria-selected="false">Marital Status</a>
+                <a class="nav-link" id="v-pills-religion-tab" data-bs-toggle="pill" href="#v-pills-religion" role="tab" aria-controls="v-pills-religion" aria-selected="false">Religion</a>
+                <a class="nav-link" id="v-pills-spouse-tab" data-bs-toggle="pill" href="#v-pills-spouse" role="tab" aria-controls="v-pills-spouse" aria-selected="false">Spouse</a>
+                <a class="nav-link" id="v-pills-finance-tab" data-bs-toggle="pill" href="#v-pills-finance" role="tab" aria-controls="v-pills-finance" aria-selected="false">Finance</a>
+                <a class="nav-link" id="v-pills-health-tab" data-bs-toggle="pill" href="#v-pills-health" role="tab" aria-controls="v-pills-health" aria-selected="false">Health</a>
+                <a class="nav-link" id="v-pills-about-tab" data-bs-toggle="pill" href="#v-pills-about" role="tab" aria-controls="v-pills-about" aria-selected="false">About</a>
+            </div>
+        </div>
+
+        <div class="col-9">
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-personal" role="tabpanel" aria-labelledby="v-pills-personal-tab">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <select asp-for="State" class="form-select" autocomplete="on"
+                                                asp-items="Html.GetEnumSelectList<States>()">
+                                            <option selected></option>
+                                        </select>
+                                        <label asp-for="State"></label>
+                                        <span asp-validation-for="State" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <select asp-for="LegalStatus" class="form-select" autocomplete="on"
+                                                asp-items="Html.GetEnumSelectList<LegalStatuses>()">
+                                            <option selected></option>
+                                        </select>
+                                        <label asp-for="LegalStatus"></label>
+                                        <span asp-validation-for="LegalStatus" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <select asp-for="Ethnicity" class="form-select" autocomplete="on"
+                                                asp-items="Html.GetEnumSelectList<Ethnicities>()">
+                                            <option selected></option>
+                                        </select>
+                                        <label asp-for="Ethnicity"></label>
+                                        <span asp-validation-for="Ethnicity" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <select asp-for="PreferredLanguage" class="form-select" autocomplete="on"
+                                                asp-items="Html.GetEnumSelectList<LanguagesEnum>()">
+                                            <option selected></option>
+                                        </select>
+                                        <label asp-for="PreferredLanguage"></label>
+                                        <span asp-validation-for="PreferredLanguage" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-education" role="tabpanel" aria-labelledby="v-pills-education-tab">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-floating">
+                                <select asp-for="Education" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<EducationLevelsEnum>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="Education"></label>
+                                <span asp-validation-for="Education" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6"></div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-marital" role="tabpanel" aria-labelledby="v-pills-marital-tab">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-floating">
+                                <select asp-for="MaritalStatus" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<MaritalStatuses>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="MaritalStatus"></label>
+                                <span asp-validation-for="MaritalStatus" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-4"></div>
+                        <div class="col-4"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-floating">
+                                <select asp-for="HasChildren" type="text" id="has-child" class="form-select" autocomplete="on"
+                                        onchange="onHasChildrenChanged(this)">
+                                    <option selected></option>
+                                    <option id="child-yes" value="true">Yes</option>
+                                    <option id="child-no" value="false">No</option>
+                                </select>
+                                <label asp-for="HasChildren"></label>
+                                <span asp-validation-for="HasChildren" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-4"></div>
+                        <div class="col-4"></div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-religion" role="tabpanel" aria-labelledby="v-pills-religion-tab">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-floating">
+                                <select asp-for="DoYouPray5Times" type="text" id="has-child" class="form-select" autocomplete="on">
+                                    <option selected></option>
+                                    <option id="child-yes" value="true">Yes</option>
+                                    <option id="child-no" value="false">No</option>
+                                </select>
+                                <label asp-for="DoYouPray5Times"></label>
+                                <span asp-validation-for="DoYouPray5Times" class="text-danger"></span>
+                            </div>
+                        </div><div class="col-4"></div>
+                        <div class="col-4"></div>
+                    </div>
+                    <div class="row">
+                        @if (AppUser.Gender == Genders.Male)
+                        {
+                            <div class="col-4">
+                                <div class="form-floating">
+                                    <select asp-for="WearsHijab" class="form-select" autocomplete="on"
+                                            asp-items="Html.GetEnumSelectList<WearsHijabOptions>()">
+                                        >
+                                        <option selected></option>
+                                    </select>
+                                    <label asp-for="WearsHijab"></label>
+                                    <span asp-validation-for="WearsHijab" class="text-danger"></span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="row">
+                        @if (AppUser.Gender == Genders.Female)
+                        {
+                            <div class="col-4">
+                                <div class="form-floating">
+                                    <select asp-for="HasBeard" type="text" id="has-child" class="form-select" autocomplete="on">
+                                        <option selected></option>
+                                        <option id="child-yes" value="true">Yes</option>
+                                        <option id="child-no" value="false">No</option>
+                                    </select>
+                                    <label asp-for="HasBeard"></label>
+                                    <span asp-validation-for="HasBeard" class="text-danger"></span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+                <div class="tab-pane fade" id="v-pills-spouse" role="tabpanel" aria-labelledby="v-pills-spouse-tab">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="WantSpouseActiveEnergetic" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="WantSpouseActiveEnergetic"></label>
+                                <span asp-validation-for="WantSpouseActiveEnergetic" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="WantSpouseAdaptable" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="WantSpouseAdaptable"></label>
+                                <span asp-validation-for="WantSpouseAdaptable" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="WantSpouseSensitive" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="WantSpouseSensitive"></label>
+                                <span asp-validation-for="WantSpouseSensitive" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="WantSpouseFlexible" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="WantSpouseFlexible"></label>
+                                <span asp-validation-for="WantSpouseFlexible" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="WantSpouseLaidBack" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="WantSpouseLaidBack"></label>
+                                <span asp-validation-for="WantSpouseLaidBack" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="WantSpousePatient" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="WantSpousePatient"></label>
+                                <span asp-validation-for="WantSpousePatient" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="WantSpousePractical" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="WantSpousePractical"></label>
+                                <span asp-validation-for="WantSpousePractical" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="WantSpousePrivate" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="WantSpousePrivate"></label>
+                                <span asp-validation-for="WantSpousePrivate" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="WantSpouseShy" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="WantSpouseShy"></label>
+                                <span asp-validation-for="WantSpouseShy" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="WantSpouseSocial" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="WantSpouseSocial"></label>
+                                <span asp-validation-for="WantSpouseSocial" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <input type="number" asp-for="MinimumSpouseAge" class="form-control" autocomplete="on"></input>
+                                <label asp-for="MinimumSpouseAge"></label>
+                                <span asp-validation-for="MinimumSpouseAge" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <input type="number" asp-for="MaximumSpouseAge" class="form-control" autocomplete="on"></input>
+                                <label asp-for="MaximumSpouseAge"></label>
+                                <span asp-validation-for="MaximumSpouseAge" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-finance" role="tabpanel" aria-labelledby="v-pills-finance-tab">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-floating">
+                                <select asp-for="FinancesHandlingAfterMarriage" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<FinancesHandlingAfterMarriageOptions>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="FinancesHandlingAfterMarriage"></label>
+                                <span asp-validation-for="FinancesHandlingAfterMarriage" class="text-danger"></span>
+                            </div>
+                        </div>
+                        @if (AppUser.Gender == Genders.Male)
+                        {
+                            <div class="col-6">
+                                <div class="form-floating">
+                                    <select asp-for="HusbandSoleProvider" type="text" class="form-select" autocomplete="on">
+                                        <option selected></option>
+                                        <option id="child-yes" value="true">Yes</option>
+                                        <option id="child-no" value="false">No</option>
+                                    </select>
+                                    <label asp-for="HusbandSoleProvider"></label>
+                                    <span asp-validation-for="HusbandSoleProvider" class="text-danger"></span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="row">
+                        @if (AppUser.Gender == Genders.Male)
+                        {
+                            <div class="col-6">
+                                <div class="form-floating">
+                                    <select asp-for="WantToWorkAfterMarriage" class="form-select" autocomplete="on"
+                                            asp-items="Html.GetEnumSelectList<YesNoMaybeOptions>()">
+                                        <option selected></option>
+                                    </select>
+                                    <label asp-for="WantToWorkAfterMarriage"></label>
+                                    <span asp-validation-for="WantToWorkAfterMarriage" class="text-danger"></span>
+                                </div>
+                            </div>
+                        }
+                        @if (AppUser.Gender == Genders.Female)
+                        {
+                            <div class="col-6">
+                                <div class="form-floating">
+                                    <select asp-for="WifeContributeFinancially" type="text" class="form-select" autocomplete="on">
+                                        <option selected></option>
+                                        <option id="child-yes" value="true">Yes</option>
+                                        <option id="child-no" value="false">No</option>
+                                    </select>
+                                    <label asp-for="WifeContributeFinancially"></label>
+                                    <span asp-validation-for="WifeContributeFinancially" class="text-danger"></span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="row">
+                        @if (AppUser.Gender == Genders.Female)
+                        {
+                            <div class="col-6">
+                                <div class="form-floating">
+                                    <select asp-for="WantWifeToWorkAfterMarriage" class="form-select" autocomplete="on"
+                                            asp-items="Html.GetEnumSelectList<YesNoMaybeOptions>()">
+                                        <option selected></option>
+                                    </select>
+                                    <label asp-for="WantWifeToWorkAfterMarriage"></label>
+                                    <span asp-validation-for="WantWifeToWorkAfterMarriage" class="text-danger"></span>
+                                </div>
+                            </div>
+                        }
+                        <div class="col-6">
+                            <div class="form-floating">
+                                <select asp-for="HasDebts" type="text" class="form-select" autocomplete="on">
+                                    <option selected></option>
+                                    <option id="child-yes" value="true">Yes</option>
+                                    <option id="child-no" value="false">No</option>
+                                </select>
+                                <label asp-for="HasDebts"></label>
+                                <span asp-validation-for="HasDebts" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-health" role="tabpanel" aria-labelledby="v-pills-health-tab">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="HaveHealthIssues" type="text" id="haveHealthIssues" class="form-select" autocomplete="on"
+                                        onchange="onHaveHealthIssuesChanged(this)">
+                                    <option selected></option>
+                                    <option id="child-yes" value="true">Yes</option>
+                                    <option id="child-no" value="false">No</option>
+                                </select>
+                                <label asp-for="HaveHealthIssues"></label>
+                                <span asp-validation-for="HaveHealthIssues" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-about" role="tabpanel" aria-labelledby="v-pills-about-tab">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="ActiveEnergetic" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="ActiveEnergetic"></label>
+                                <span asp-validation-for="ActiveEnergetic" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="Adaptable" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="Adaptable"></label>
+                                <span asp-validation-for="Adaptable" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="Sensitive" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="Sensitive"></label>
+                                <span asp-validation-for="Sensitive" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="Flexible" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="Flexible"></label>
+                                <span asp-validation-for="Flexible" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="LaidBack" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="LaidBack"></label>
+                                <span asp-validation-for="LaidBack" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="Patient" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="Patient"></label>
+                                <span asp-validation-for="Patient" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="Practical" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="Practical"></label>
+                                <span asp-validation-for="Practical" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="Private" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="Private"></label>
+                                <span asp-validation-for="Private" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="Shy" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="Shy"></label>
+                                <span asp-validation-for="Shy" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <select asp-for="Social" class="form-select" autocomplete="on"
+                                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                                    <option selected></option>
+                                </select>
+                                <label asp-for="Social"></label>
+                                <span asp-validation-for="Social" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-9"></div>
+        <div class="col-3">
+            <button id="search" type="submit" class="w-100 btn btn-lg btn-primary">Search</button>
+        </div>
+    </div>
+</form>
+
+<hr />
+
+<div id="searchResults" class="row">
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var frm = $('#filtersForm');
+            var url = '@Url.Action(action: "Search", controller: "ProfileSearch")';
+
+            frm.submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: frm.attr('method'),
+                    url: url,
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    data: frm.serialize(),
+                    processData: false,
+                }).done(function (data) {
+                    $("#searchResults").html(data);
+
+                    $(".pagination li.current-page").on("click", function () {
+                        if ($(this).hasClass("active")) {
+                            return false;
+                        }
+                        else {
+                            var currentPage = $(this).index();
+                            $(".pagination li").removeClass("active");
+                            $(this).addClass("active");
+
+                            $('#PageNumber').val(currentPage);
+                            frm.submit();
+                        }
+                    });
+
+                    $("#previous").on("click", function (e) {
+                        e.preventDefault();
+                        var currentPage = $('#PageNumber').val();
+                        currentPage--;
+
+                        $('#PageNumber').val(currentPage);
+                        frm.submit();
+                    })
+
+                    $("#next").on("click", function (e) {
+                        e.preventDefault();
+                        var currentPage = $('#PageNumber').val();
+                        currentPage++;
+                        $('#PageNumber').val(currentPage);
+                        frm.submit();
+                    })
+                }).fail(function () {
+                    alert("Fail.");
+                });
+            });
+
+            frm.submit();
+        });
+    </script>
+}

@@ -1,0 +1,303 @@
+﻿@using SacredBond.Common.Enums
+@model SacredBond.App.Models.Admin.AdminProfileViewModel
+
+@{
+    ViewData["Title"] = Model.PersonalViewModel.FullName;
+    ViewData["Status"] = Model.PersonalViewModel.Status;
+}
+
+<div class="mt-4">
+    <div class="page-title-box">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <h1 class="page-title">@ViewData["Title"]</h1>
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item" aria-current="page"><a href="@Url.Action("Index", "Admin")">Home</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="@Url.Action("GetProfiles", "Admin", new { reportType = ViewData["Status"] })">@ViewData["Status"] Profiles</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="@Url.Action("MoreInfo", "Admin", new { id = Model.PersonalViewModel.ProfileId })">@ViewData["Title"]</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <ul class="nav nav-tabs" id="more-info-nav" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab" aria-controls="info" aria-selected="true">
+                        <img src="/images/info.png" title="information"/>
+                        Information
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="matches-tab" data-bs-toggle="tab" data-bs-target="#matches" type="button" role="tab" aria-controls="matches" aria-selected="false">
+                        <img src="/images/matches.png" title="matches" />
+                        Matches
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#notes" type="button" role="tab" aria-controls="notes" aria-selected="false">
+                        <img src="/images/notes.png" title="notes" />
+                        Notes
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8 tab-content">
+            <div class="tab-pane active" id="info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
+                <partial name="../Shared/_ProfileMetaData.cshtml" model="@Model" />
+                @if (Model.PersonalViewModel.Status == ProfileStatus.Submitted)
+                {
+                    <form id="handleApplicationForm" class="mt-3" method="post">
+                        <input name="profileId" id="profileId" asp-for="PersonalViewModel.ProfileId" type="hidden" />
+                        <input name="recipientEmail" asp-for="PersonalViewModel.Email" type="hidden" />
+                        <input name="status" id="status" type="hidden" />
+                        <input name="rejectReason" id="rejectReason" type="hidden" />
+
+                        <div class="row">
+                            <div class="col-6"></div>
+                            <div class="col-3">
+                                <button id="btnAccept" type="button" class="w-100 btn btn-md btn-primary"
+                                        data-bs-toggle="modal" data-bs-target="#approveConfirmationModal">
+                                    Approve
+                                </button>
+
+                                <!-- Modal -->
+                                <partial name="../Shared/_ConfirmationModal.cshtml"
+                                         model="@(new ConfirmationViewModel{
+                                ModalId ="approveConfirmationModal",
+                                ModalActionText = "Continue",
+                                Title="Approve Profile",
+                                Message="Are you sure you want to approve the profile of " + Model.PersonalViewModel.FullName + "?"})" />
+                            </div>
+                            <div class="col-3">
+                                <button id="btnReject" type="button" class="w-100 btn btn-md btn-primary"
+                                        data-bs-toggle="modal" data-bs-target="#rejectConfirmationModal">
+                                    Reject
+                                </button>
+
+                                <!-- Modal -->
+                                <partial name="../Shared/_ConfirmationModal.cshtml"
+                                         model="@(new ConfirmationViewModel{
+                                ModalId ="rejectConfirmationModal",
+                                ModalActionText = "Continue",
+                                SendMessageModal = true,
+                                Title="Reject Profile",
+                                Message="Are you sure you want to reject the profile of " + Model.PersonalViewModel.FullName + "?"})" />
+                            </div>
+                        </div>
+                    </form>
+                }
+            </div>
+            <div class="tab-pane" id="matches" role="tabpanel" aria-labelledby="matches-tab" tabindex="0">
+                <div class="bg-white p-3 shadow-sm border widget">
+                    <h4 class="widget-title">
+                        Matches
+                    </h4>
+                    <hr/>
+                    @foreach (var match in Model.HistoricalMatches)
+                    {
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item px-3 border-0 rounded-3 mb-2 list-group-item-primary">
+                                @match.SpouseUserFullName
+                            </li>
+                            <li class="list-group-item px-3 border-0 rounded-3 mb-2 list-group-item-secondary">
+                                @match.SpouseUserEmail
+                            </li>
+                            <li class="list-group-item px-3 border-0 rounded-3 mb-2 list-group-item-success">
+                                @match.SpouseUserGender.ToString()
+                            </li>
+                            <li class="list-group-item px-3 border-0 rounded-3 mb-2 list-group-item-danger">
+                                @match.Status.ToString()
+                            </li>
+                        </ul>
+                    }
+               </div>
+            </div>
+            <div class="tab-pane" id="notes" role="tabpanel" aria-labelledby="notes-tab" tabindex="0">
+                <div class="bg-white p-3 shadow-sm border widget">
+                    <h4 class="widget-title">
+                        Notes
+                    </h4>
+                    <hr />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="p-3">
+                <div class="form-group mb-4">
+                    <div class="profile-timeline-item">
+                        <img src="/images/check.png" />
+                        <div class="profile-timeline-item-label">
+                            <div class="mr-auto">
+                                <h6 class="mb-0">Created</h6>
+                                <span>@Model.PersonalViewModel.CreateTime.ToShortDateString()</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <div class="profile-timeline-item">
+                        @if (Model.PersonalViewModel.SubmittedDate.HasValue)
+                        {
+                            <img src="/images/check.png" />
+                        }
+                        else
+                        {
+                            <img src="/images/unknown.png" />
+                        }
+                        <div class="profile-timeline-item-label">
+                            <div class="mr-auto">
+                                <h6 class="mb-0">Submitted</h6>
+                                @if (Model.PersonalViewModel.SubmittedDate.HasValue)
+                                {
+                                    <span>@Model.PersonalViewModel.SubmittedDate.Value.ToShortDateString()</span>
+                                }
+                                else
+                                {
+                                    <span>--/--/----</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.PersonalViewModel.Status == ProfileStatus.Rejected)
+                {
+                    <div class="form-group mb-4">
+                        <div class="profile-timeline-item">
+                            @if (Model.PersonalViewModel.RejectedDate.HasValue)
+                            {
+                                <img src="/images/check.png" />
+                            }
+                            else
+                            {
+                                <img src="/images/unknown.png" />
+                            }
+                            <div class="profile-timeline-item-label">
+                                <div class="mr-auto">
+                                    <h6 class="mb-0">Rejected</h6>
+                                    @if (Model.PersonalViewModel.RejectedDate.HasValue)
+                                    {
+                                        <span>@Model.PersonalViewModel.RejectedDate.Value.ToShortDateString()</span>
+                                    }
+                                    else
+                                    {
+                                        <span>--/--/----</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="form-group mb-4">
+                    <div class="profile-timeline-item">
+                        @if (Model.PersonalViewModel.ApprovedDate.HasValue)
+                        {
+                            <img src="/images/check.png" />
+                        }
+                        else
+                        {
+                            <img src="/images/unknown.png" />
+                        }
+                        <div class="profile-timeline-item-label">
+                            <div class="mr-auto">
+                                <h6 class="mb-0">Approved</h6>
+                                @if (Model.PersonalViewModel.ApprovedDate.HasValue)
+                                {
+                                    <span>@Model.PersonalViewModel.ApprovedDate.Value.ToShortDateString()</span>
+                                }
+                                else
+                                {
+                                    <span>--/--/----</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+            $("#meta-data").disableInput();
+            var frm = $('#handleApplicationForm');
+            var url = '@Url.Action("Index", "Admin")';
+            var continueSubmit = true;
+
+            $('#rejectConfirmationModal').on('show.bs.modal', function (event) {
+                //var button = $(event.relatedTarget) // Button that triggered the modal
+                var recipient = '@Model.PersonalViewModel.Email'//button.data('whatever') // Extract info from data-* attributes
+                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                var modal = $(this)
+                modal.find('.modal-body input').val(recipient)
+                modal.find('.modal-body input').prop("disabled", true)
+            });
+
+            $("#rejectConfirmationModal").on("click", ".btn-primary", function () {
+                var modal = $("#rejectConfirmationModal"); //$('#message-text').val();
+                var rejectReason = modal.find('.modal-body textarea').val();
+
+                if (rejectReason == '' || rejectReason == undefined) {
+                    alert('Reject reason should be applied');
+                    continueSubmit = false;
+                    return;
+                }
+                else {
+                    //var rejectReason = $('#message-text').val();
+                    $('#rejectReason').val(rejectReason);
+                }
+
+                $('#status').val('@ProfileStatus.Rejected');
+            });
+
+
+
+            $("#approveConfirmationModal").on("click", ".btn-primary", function () {
+                $('#status').val('@ProfileStatus.Approved');
+            });
+
+            frm.submit(function (e) {
+                e.preventDefault(e);
+                if (continueSubmit) {
+                    $.ajax({
+                        async: true,
+                        type: frm.attr('method'),
+                        url: "/Admin/UpdateProfileStatus",
+                        data: frm.serialize(), //formData,
+                        cache: false,
+                        processData: false,
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // optional
+                        //contentType: 'application/json',
+                        success: function (data) {
+                            window.location.href = url;
+                        },
+                        error: function (request, status, error) {
+                            alert(`error in updating application status ${error}`)
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

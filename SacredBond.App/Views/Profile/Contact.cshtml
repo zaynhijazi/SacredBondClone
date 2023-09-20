@@ -1,0 +1,79 @@
+﻿@using SacredBond.Common.Enums
+@model SacredBond.App.Models.Profile.ContactViewModel
+
+@{
+    ViewData["Title"] = "Communication";
+}
+
+
+<form id="ContactForm" method="post">
+    <input asp-for="ProfileId" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-9">
+            <div class="form-floating">
+                <select required asp-for="BestWayToContact" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<ContactMethods>()" aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="BestWayToContact"></label>
+                <span asp-validation-for="BestWayToContact" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-9">
+            <div class="form-floating">
+                <select required asp-for="ShareInfoWithMatches" type="text" class="form-select" autocomplete="on">
+                    <option selected></option>
+                    <option id="child-yes" value="true">Yes</option>
+                    <option id="child-no" value="false">No</option>
+                </select>
+                <label asp-for="ShareInfoWithMatches"></label>
+                <span asp-validation-for="ShareInfoWithMatches" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-9">
+            <div class="form-floating">
+                <select required asp-for="HasDomesticViolenceHistory" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<YesNoMaybeOptions>()" aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="HasDomesticViolenceHistory"></label>
+                <span asp-validation-for="HasDomesticViolenceHistory" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-3">
+            <a href="@Url.Action("Finance", "Profile", new { id = Model.ProfileId})" class="w-100 btn btn-md btn-primary">Back</a>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-3">
+            @if (Model.CanEditProfile)
+            {
+                <button id="save" type="submit" class="w-100 btn btn-md btn-primary">Save & Continue</button>
+            }
+            else
+            {
+                <button id="continue" type="submit" class="w-100 btn btn-md btn-primary">Continue</button>
+            }
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            $("#contactLink").addClass("active");
+            if (!@Model.CanEditProfile.ToString().ToLower()) {
+                $("#ContactForm").disableInput();
+            }
+        });
+    </script>
+}

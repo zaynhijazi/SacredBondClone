@@ -1,0 +1,90 @@
+﻿@using SacredBond.Common.Enums
+@model SacredBond.App.Models.Profile.MaritalViewModel
+@{
+    ViewData["Title"] = "Marital and Family Background";
+}
+
+<form id="MaritalForm" method="post">
+    <input asp-for="ProfileId" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="MaritalStatus" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<MaritalStatuses>()" aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="MaritalStatus"></label>
+                <span asp-validation-for="MaritalStatus" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="HasChildren" type="text" id="has-child" class="form-select" autocomplete="on"
+                        onchange="onHasChildrenChanged(this)">
+                    <option selected></option>
+                    <option id="child-yes" value="true">Yes</option>
+                    <option id="child-no" value="false">No</option>
+                </select>
+                <label asp-for="HasChildren"></label>
+                <span asp-validation-for="HasChildren" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="display:none;" id="numOfChildrenDiv">
+        <div class="col-6">
+            <div class="form-floating">
+                <input asp-for="NumberOfChildren" class="form-control" autocomplete="on" aria-required="true" />
+                <label asp-for="NumberOfChildren"></label>
+                <span asp-validation-for="NumberOfChildren" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+    <div class="row">
+        <div class="col-3">
+            <a href="@Url.Action("EducationalProfessional", "Profile", new { id = Model.ProfileId})" class="w-100 btn btn-md btn-primary">Back</a>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-3">
+            @if (Model.CanEditProfile)
+            {
+                <button id="save" type="submit" class="w-100 btn btn-md btn-primary">Save & Continue</button>
+            }
+            else
+            {
+                <button id="continue" type="submit" class="w-100 btn btn-md btn-primary">Continue</button>
+            }
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            var hasChlildrenValue = $('#has-child').find("option:selected").val();
+            if (hasChlildrenValue == 'true') {
+                $('#numOfChildrenDiv').show();
+            }
+            $("#maritalLink").addClass("active");
+            if (!@Model.CanEditProfile.ToString().ToLower()) {
+                $("#MaritalForm").disableInput();
+            }
+        });
+
+        function onHasChildrenChanged(ele) {
+            var selected = $(ele).find("option:selected").val();
+            if (selected == "true") {
+                $('#numOfChildrenDiv').show();
+            }
+            else {
+                $('#numOfChildrenDiv').hide();
+                $('#NumberOfChildren').val(0);
+            }
+        }
+    </script>
+}

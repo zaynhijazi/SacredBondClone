@@ -1,0 +1,71 @@
+﻿@model SacredBond.App.Models.Profile.ProfilePicturesViewModel
+
+@{
+    ViewData["Title"] = "Profile Picture Setup";
+}
+
+<form method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="ProfileId" />
+    <input type="hidden" asp-for="IsPicturesCompleted" />
+
+    @if (Model.IsPicturesCompleted)
+    {
+        <!-- Display images if IsPicturesCompleted is true -->
+        <div class="row">
+            @foreach (var picture in Model.pictures)
+            {
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @if (!string.IsNullOrEmpty(picture.PictureUri))
+                        {
+                            var imageUrl = picture.PictureUri + "?" + picture.SasToken;
+                            <img src="@imageUrl" alt="Image" class="img-fluid" />
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    @for (var i = 0; i < Model.pictures.Count; i++)
+    {
+        <div class="form-group">
+            @if (!Model.IsPicturesCompleted)
+            {
+                <input type="file" asp-for="pictures[i].Image" class="form-control" accept="image/*" required="required">
+            }
+            else
+            {
+                <input type="file" asp-for="pictures[i].Image" class="form-control" accept="image/*">
+            }
+            <span asp-validation-for="pictures[i].Image" class="text-danger"></span>
+        </div>
+        //if (Model.pictures[i].Image != null)
+        //{
+        //    Model.pictures[i].IsChanged = true;
+        //}
+        <!-- Hidden fields for PictureViewModel properties -->
+        <input type="hidden" asp-for="pictures[i].ProfilePictureId" />
+        <input type="hidden" asp-for="pictures[i].PictureUri"  />
+        <input type="hidden" asp-for="pictures[i].SasToken" />
+        <input type="hidden" asp-for="pictures[i].PictureNumber" />
+        <input type="hidden" asp-for="pictures[i].ProfileId" />
+    }
+
+    <div class="row">
+        <div class="col-3">
+            <a href="@Url.Action("Personal", "Profile", new { id = Model.ProfileId})" class="w-100 btn btn-md btn-primary">Back</a>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-3">
+            @if (Model.CanEditProfile)
+            {
+                <button id="save" type="submit" class="w-100 btn btn-md btn-primary">Save & Continue</button>
+            }
+            else
+            {
+                <button id="continue" type="submit" class="w-100 btn btn-md btn-primary">Continue</button>
+            }
+        </div>
+    </div>
+</form>

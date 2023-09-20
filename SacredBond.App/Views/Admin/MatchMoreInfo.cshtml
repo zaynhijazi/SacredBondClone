@@ -1,0 +1,146 @@
+﻿@using SacredBond.Common.Enums
+@using System.Globalization
+@model SacredBond.App.Models.Admin.MatchProfilesViewModel
+
+@{
+    ViewData["Title"] = "Match Details";
+    var statusDate = "";
+    if (Model.Status == InterestedInStatus.Approved)
+    {
+        statusDate = Model.ApprovedDate?.ToLongDateString();
+    }
+    else if (Model.Status == InterestedInStatus.Rejected)
+    {
+        statusDate = Model.RejectedDate?.ToLongDateString();
+    }
+    else
+    {
+        statusDate = Model.StatusChangedDate.ToLongDateString();
+    }
+}
+<div class="row">
+    <h1 class="display-6">
+        @(Model.Status.ToString() + ": " + statusDate)
+    </h1>
+</div>
+<div class="row">
+    <div class="col-md-5">
+        <partial name="../Shared/_ProfileMetaData.cshtml" model="@Model.Profile" />
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-5">
+        <partial name="../Shared/_ProfileMetaData.cshtml" model="@Model.Spouse" />
+    </div>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-7"></div>
+    <div class="col-md-5">
+        @if (Model.Status == InterestedInStatus.Approved || Model.Status == InterestedInStatus.InReview || ViewBag.CanBeCanceled)
+        {
+            <form id="updateMatchStatusForm" method="post">
+                <input name="profileId" id="profileId" asp-for="Profile.PersonalViewModel.ProfileId" type="hidden" />
+                <input name="spouseId" id="spouseId" asp-for="Spouse.PersonalViewModel.ProfileId" type="hidden" />
+                <input name="status" id="status" type="hidden" />
+                <input name="oldStatus" id="oldStatus" type="hidden" />
+
+                @if (Model.Status == InterestedInStatus.Approved)
+                {
+                    <button id="btnReviewDone" type="button" class="w-100 btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#confirmationModal">In Review</button>
+
+                    <!-- Modal -->
+                    <partial name="../Shared/_ConfirmationModal.cshtml"
+                     model="@(new ConfirmationViewModel{
+                                ModalId = "confirmationModal",
+                                ModalActionText = "Ok",
+                                Title="Cancel Match",
+                                Message="Are you sure you want to update match status to be \"In Review\"?"})" />
+
+                }
+                else if (Model.Status == InterestedInStatus.InReview)
+                {
+                    <button id="btnCompleteDone" type="button" class="w-100 btn btn-lg btn-primary"
+                    data-bs-toggle="modal" data-bs-target="#confirmationModal">
+                        Complete
+                    </button>
+
+                    <!-- Modal -->
+                    <partial name="../Shared/_ConfirmationModal.cshtml"
+                     model="@(new ConfirmationViewModel{
+                                ModalId = "confirmationModal",
+                                ModalActionText = "Ok",
+                                Title="Complete Match",
+                                Message="Are you sure you want to complete match?"})" />
+
+                }
+
+                @if (ViewBag.CanBeCanceled)
+                {
+                    <input name="recipientEmail" id="recipientEmail" type="hidden" />
+                    <input name="spouseName" id="spouseName" type="hidden" />
+
+                    <!-- Button trigger modal -->
+                    <button id="btnCancelDone" type="button" class="w-100 btn btn-lg btn-primary"
+                    data-bs-toggle="modal" data-bs-target="#cancelConfirmationModal">
+                        Cancel
+                    </button>
+
+                    <!-- Modal -->
+                    <partial name="../Shared/_ConfirmationModal.cshtml"
+                     model="@(new ConfirmationViewModel{
+                                ModalId = "cancelConfirmationModal",
+                                ModalActionText = "Ok",
+                                Title="Cancel Match",
+                                Message="Are you sure you want to cancel?"})" />
+                }
+            </form>
+        }
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var frm = $('#updateMatchStatusForm');
+            var url = '@Url.Action("Index", "Admin")';
+            $('#oldStatus').val('@Model.Status');
+
+
+            $("#cancelConfirmationModal").on("click", ".btn-primary", function () {
+                $('#recipientEmail').val('@Model.Profile.PersonalViewModel.Email');
+                $('#spouseName').val('@Model.Spouse.PersonalViewModel.FullName');
+
+                $('#status').val('@InterestedInStatus.Canceled');
+            });
+
+            $("#confirmationModal").on("click", ".btn-primary", function () {
+                var newStatus = '@(Model.Status == InterestedInStatus.Approved ? InterestedInStatus.InReview : InterestedInStatus.Completed)';
+                $('#status').val(newStatus);
+            });
+
+
+            frm.submit(function (e) {
+                e.preventDefault(e);
+                $.ajax({
+                    async: true,
+                    type: frm.attr('method'),
+                    url: "/Admin/UpdateMatchStatus",
+                    data: frm.serialize(), //formData,
+                    cache: false,
+                    processData: false,
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // optional
+                    //contentType: 'application/json',
+                    success: function (data) {
+                        window.location.href = url;
+                    },
+                    error: function (request, status, error) {
+                        alert(`error in updating match status ${error}`)
+                    }
+                });
+            });
+        });
+    </script>
+}

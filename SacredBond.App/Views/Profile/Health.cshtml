@@ -1,0 +1,90 @@
+﻿@using SacredBond.Common.Enums
+@model SacredBond.App.Models.Profile.HealthViewModel
+
+@{
+    ViewData["Title"] = "Health";
+}
+
+<form id="HealthForm" method="post">
+    <input asp-for="ProfileId" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="HaveHealthIssues" type="text" id="haveHealthIssues" class="form-select" autocomplete="on"
+                        onchange="onHaveHealthIssuesChanged(this)">
+                    <option selected></option>
+                    <option id="child-yes" value="true">Yes</option>
+                    <option id="child-no" value="false">No</option>
+                </select>
+                <label asp-for="HaveHealthIssues"></label>
+                <span asp-validation-for="HaveHealthIssues" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-12" style="display:none;" id="HealthIssuesDiv">
+            <div class="form-floating">
+                <textarea required asp-for="HealthIssues" class="form-control" autocomplete="on" aria-required="true"></textarea>
+                <label asp-for="HealthIssues"></label>
+                <span asp-validation-for="HealthIssues" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-floating">
+                <textarea required asp-for="PhysicalImpediments" class="form-control" autocomplete="on" aria-required="true"></textarea>
+                <label asp-for="PhysicalImpediments"></label>
+                <span asp-validation-for="PhysicalImpediments" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+    <div class="row">
+        <div class="col-3">
+            <a href="@Url.Action("Spouse", "Profile", new { id = Model.ProfileId})" class="w-100 btn btn-md btn-primary">Back</a>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-3">
+            @if (Model.CanEditProfile)
+            {
+                <button id="save" type="submit" class="w-100 btn btn-md btn-primary">Save & Continue</button>
+            }
+            else
+            {
+                <button id="continue" type="submit" class="w-100 btn btn-md btn-primary">Continue</button>
+            }
+        </div>
+    </div>
+</form>
+
+
+@section Scripts{
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            var haveHealthIssues = $('#haveHealthIssues').find("option:selected").val();
+            if (haveHealthIssues == 'true') {
+                $('#HealthIssuesDiv').show();
+            }
+            $("#healthLink").addClass("active");
+            if (!@Model.CanEditProfile.ToString().ToLower()) {
+                $("#HealthForm").disableInput();
+            }
+        });
+
+
+        function onHaveHealthIssuesChanged(ele) {
+            var selected = $(ele).find("option:selected").val();
+            //alert('selected: ' + selected);
+            if (selected == 'true') {
+                $('#HealthIssuesDiv').show();
+            }
+            else {
+                $('#HealthIssuesDiv').hide();
+                $('#HealthIssues').val('');
+            }
+        }
+    </script>
+}

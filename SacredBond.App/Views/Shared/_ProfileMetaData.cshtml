@@ -1,0 +1,611 @@
+﻿@using SacredBond.Common.Enums
+@model SacredBond.App.Models.Admin.AdminProfileViewModel
+
+<div id="meta-data">
+
+
+    <div class="bg-white p-3 mb-3 shadow-sm border widget">
+        <h4 class="widget-title">
+            Personal Information
+        </h4>
+        <hr />
+        <div>
+            @if (ViewBag.ShowPersonalData)
+            {
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <input disabled asp-for="PersonalViewModel.FullName" class="form-control" />
+                            <label asp-for="PersonalViewModel.FullName"></label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <input disabled asp-for="PersonalViewModel.Gender" class="form-control" />
+                            <label asp-for="PersonalViewModel.Gender"></label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <input disabled asp-for="PersonalViewModel.Email" class="form-control" />
+                            <label asp-for="PersonalViewModel.Email"></label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <input disabled asp-for="PersonalViewModel.Phone" class="form-control" />
+                            <label asp-for="PersonalViewModel.Phone"></label>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (ViewBag.ShowPersonalData)
+            {
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input disabled asp-for="PersonalViewModel.DateOfBirth" class="form-control" />
+                            <label asp-for="PersonalViewModel.DateOfBirth"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input disabled asp-for="PersonalViewModel.AddressLine1" class="form-control" />
+                            <label asp-for="PersonalViewModel.AddressLine1"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input disabled asp-for="PersonalViewModel.AddressLine2" class="form-control" />
+                            <label asp-for="PersonalViewModel.AddressLine2"></label>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-floating">
+                        <input disabled asp-for="PersonalViewModel.City" class="form-control" />
+                        <label asp-for="PersonalViewModel.City"></label>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-floating">
+                        <input disabled asp-for="PersonalViewModel.State" class="form-control" />
+                        <label asp-for="PersonalViewModel.State"></label>
+                    </div>
+                </div>
+                @if (ViewBag.ShowPersonalData)
+                {
+                    <div class="col-4">
+                        <div class="form-floating">
+                            <input disabled asp-for="PersonalViewModel.ZipCode" class="form-control" />
+                            <label asp-for="PersonalViewModel.ZipCode"></label>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="PersonalViewModel.LegalStatus" class="form-control" />
+                        <label asp-for="PersonalViewModel.LegalStatus"></label>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="PersonalViewModel.Ethnicity" class="form-control" />
+                        <label asp-for="PersonalViewModel.Ethnicity"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="PersonalViewModel.PreferredLanguage" class="form-control" />
+                        <label asp-for="PersonalViewModel.PreferredLanguage"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="languages" class="form-control" />
+                        <label asp-for="languages"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white p-3 mb-3 shadow-sm border widget">
+        <h4 class="widget-title">
+            Educational & Professional Background
+        </h4>
+        <hr />
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="EducationalProfessionalViewModel.Education" class="form-control" />
+                        <label asp-for="EducationalProfessionalViewModel.Education"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="EducationalProfessionalViewModel.Occupation" class="form-control" />
+                        <label asp-for="EducationalProfessionalViewModel.Occupation"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white p-3 mb-3 shadow-sm border widget">
+        <h4 class="widget-title">
+            Marital and Family Background
+        </h4>
+        <hr />
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="MaritalViewModel.MaritalStatus" class="form-control" />
+                        <label asp-for="MaritalViewModel.MaritalStatus"></label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="MaritalViewModel.HasChildren" class="form-control" />
+                        <label asp-for="MaritalViewModel.HasChildren"></label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="MaritalViewModel.NumberOfChildren" class="form-control" />
+                        <label asp-for="MaritalViewModel.NumberOfChildren"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white p-3 mb-3 shadow-sm border widget">
+        <h4 class="widget-title">
+            Religious Outlook and Practices
+        </h4>
+        <hr />
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="ReligionViewModel.ReligionImportance" class="form-control" />
+                        <label asp-for="ReligionViewModel.ReligionImportance"></label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="ReligionViewModel.DoYouPray5Times" class="form-control" />
+                        <label asp-for="ReligionViewModel.DoYouPray5Times"></label>
+                    </div>
+                </div>
+            </div>
+            @if (Model.PersonalViewModel.Gender == Genders.Female)
+            {
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="ReligionViewModel.WearsHijab" class="form-control" />
+                        <label asp-for="ReligionViewModel.WearsHijab"></label>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="ReligionViewModel.HasBeard" class="form-control" />
+                        <label asp-for="ReligionViewModel.HasBeard"></label>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="bg-white p-3 mb-3 shadow-sm border widget">
+        <h4 class="widget-title">
+            About Yourself
+        </h4>
+        <hr />
+        <div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input disabled asp-for="AboutViewModel.ActiveEnergetic" class="form-control" />
+                        <label asp-for="AboutViewModel.ActiveEnergetic"></label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating">
+                        <div class="form-floating">
+                            <input disabled asp-for="AboutViewModel.Adaptable" class="form-control" />
+                            <label asp-for="AboutViewModel.Adaptable"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input disabled asp-for="AboutViewModel.Sensitive" class="form-control" />
+                        <label asp-for="AboutViewModel.Sensitive"></label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input disabled asp-for="AboutViewModel.Flexible" class="form-control" />
+                        <label asp-for="AboutViewModel.Flexible"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input disabled asp-for="AboutViewModel.LaidBack" class="form-control" />
+                        <label asp-for="AboutViewModel.LaidBack"></label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input disabled asp-for="AboutViewModel.Patient" class="form-control" />
+                        <label asp-for="AboutViewModel.Patient"></label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating">
+                        <div class="form-floating">
+                            <input disabled asp-for="AboutViewModel.Practical" class="form-control" />
+                            <label asp-for="AboutViewModel.Practical"></label>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input disabled asp-for="AboutViewModel.Private" class="form-control" />
+                        <label asp-for="AboutViewModel.Private"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input disabled asp-for="AboutViewModel.Shy" class="form-control" />
+                        <label asp-for="AboutViewModel.Shy"></label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input disabled asp-for="AboutViewModel.Social" class="form-control" />
+                        <label asp-for="AboutViewModel.Social"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="AboutViewModel.ShareAboutYourself" class="form-control" />
+                        <label asp-for="AboutViewModel.ShareAboutYourself"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="AboutViewModel.DescribeTypicalDay" class="form-control" />
+                        <label asp-for="AboutViewModel.DescribeTypicalDay"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="AboutViewModel.ShortTermGoals" class="form-control" />
+                        <label asp-for="AboutViewModel.ShortTermGoals"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="AboutViewModel.LongTermGoals" class="form-control" />
+                        <label asp-for="AboutViewModel.LongTermGoals"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="AboutViewModel.HobbiesAndActivities" class="form-control" />
+                        <label asp-for="AboutViewModel.HobbiesAndActivities"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white p-3 mb-3 shadow-sm border widget">
+        <h4 class="widget-title">
+            Spouse
+        </h4>
+        <hr />
+        <div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input disabled asp-for="SpouseViewModel.WantSpouseActiveEnergetic" class="form-control" />
+                        <label asp-for="SpouseViewModel.WantSpouseActiveEnergetic"></label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating">
+                        <div class="form-floating">
+                            <input disabled asp-for="SpouseViewModel.WantSpouseAdaptable" class="form-control" />
+                            <label asp-for="SpouseViewModel.WantSpouseAdaptable"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input disabled asp-for="SpouseViewModel.WantSpouseSensitive" class="form-control" />
+                        <label asp-for="SpouseViewModel.WantSpouseSensitive"></label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input disabled asp-for="SpouseViewModel.WantSpouseFlexible" class="form-control" />
+                        <label asp-for="SpouseViewModel.WantSpouseFlexible"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input disabled asp-for="SpouseViewModel.WantSpouseLaidBack" class="form-control" />
+                        <label asp-for="SpouseViewModel.WantSpouseLaidBack"></label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input disabled asp-for="SpouseViewModel.WantSpousePatient" class="form-control" />
+                        <label asp-for="SpouseViewModel.WantSpousePatient"></label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating">
+                        <div class="form-floating">
+                            <input disabled asp-for="SpouseViewModel.WantSpousePractical" class="form-control" />
+                            <label asp-for="SpouseViewModel.WantSpousePractical"></label>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input disabled asp-for="SpouseViewModel.WantSpousePrivate" class="form-control" />
+                        <label asp-for="SpouseViewModel.WantSpousePrivate"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input disabled asp-for="SpouseViewModel.WantSpouseShy" class="form-control" />
+                        <label asp-for="SpouseViewModel.WantSpouseShy"></label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input disabled asp-for="SpouseViewModel.WantSpouseSocial" class="form-control" />
+                        <label asp-for="SpouseViewModel.WantSpouseSocial"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input disabled asp-for="SpouseViewModel.MinimumSpouseAge" class="form-control" />
+                        <label asp-for="SpouseViewModel.MinimumSpouseAge"></label>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input disabled asp-for="SpouseViewModel.MaximumSpouseAge" class="form-control" />
+                        <label asp-for="SpouseViewModel.MaximumSpouseAge"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="SpouseViewModel.SpouseMaritalStatuses" class="form-control" />
+                        <label asp-for="SpouseViewModel.SpouseMaritalStatuses"></label>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="SpouseViewModel.ConsiderSpouseWithChildren" class="form-control" />
+                        <label asp-for="SpouseViewModel.ConsiderSpouseWithChildren"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="SpouseViewModel.LookingForInSpouse" class="form-control" />
+                        <label asp-for="SpouseViewModel.LookingForInSpouse"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white p-3 mb-3 shadow-sm border widget">
+        <h4 class="widget-title">
+            Health
+        </h4>
+        <hr />
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="HealthViewModel.HaveHealthIssues" class="form-control" />
+                        <label asp-for="HealthViewModel.HaveHealthIssues"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="HealthViewModel.HealthIssues" class="form-control" />
+                        <label asp-for="HealthViewModel.HealthIssues"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="HealthViewModel.PhysicalImpediments" class="form-control" />
+                        <label asp-for="HealthViewModel.PhysicalImpediments"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white p-3 mb-3 shadow-sm border widget">
+        <h4 class="widget-title">
+            Family
+        </h4>
+        <hr />
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="FamilyViewModel.LiveWithFamilyPostMarriage" class="form-control" />
+                        <label asp-for="FamilyViewModel.LiveWithFamilyPostMarriage"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white p-3 mb-3 shadow-sm border widget">
+        <h4 class="widget-title">
+            Finance
+        </h4>
+        <hr />
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="FinanceViewModel.FinancesHandlingAfterMarriage" class="form-control" />
+                        <label asp-for="FinanceViewModel.FinancesHandlingAfterMarriage"></label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="FinanceViewModel.HasDebts" class="form-control" />
+                        <label asp-for="FinanceViewModel.HasDebts"></label>
+                    </div>
+                </div>
+            </div>
+            @if (Model.PersonalViewModel.Gender == Genders.Female)
+            {
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input disabled asp-for="FinanceViewModel.HusbandSoleProvider" class="form-control" />
+                            <label asp-for="FinanceViewModel.HusbandSoleProvider"></label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input disabled asp-for="FinanceViewModel.WantToWorkAfterMarriage" class="form-control" />
+                            <label asp-for="FinanceViewModel.WantToWorkAfterMarriage"></label>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input disabled asp-for="FinanceViewModel.WifeContributeFinancially" class="form-control" />
+                            <label asp-for="FinanceViewModel.WifeContributeFinancially"></label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input disabled asp-for="FinanceViewModel.WantWifeToWorkAfterMarriage" class="form-control" />
+                            <label asp-for="FinanceViewModel.WantWifeToWorkAfterMarriage"></label>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="bg-white p-3 mb-3 shadow-sm border widget">
+        <h4 class="widget-title">
+            Communication
+        </h4>
+        <hr />
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="ContactViewModel.BestWayToContact" class="form-control" />
+                        <label asp-for="ContactViewModel.BestWayToContact"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <div class="form-floating">
+                            <input disabled asp-for="ContactViewModel.ShareInfoWithMatches" class="form-control" />
+                            <label asp-for="ContactViewModel.ShareInfoWithMatches"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input disabled asp-for="ContactViewModel.HasDomesticViolenceHistory" class="form-control" />
+                        <label asp-for="ContactViewModel.HasDomesticViolenceHistory"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

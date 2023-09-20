@@ -1,0 +1,62 @@
+﻿@using SacredBond.Common.Enums
+@model SacredBond.App.Models.Profile.EducationalProfessionalViewModel
+@{
+    ViewData["Title"] = "Educational & Professional Background";
+}
+
+<form id="EducationalForm" method="post">
+    <input asp-for="ProfileId" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="Education" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<EducationLevelsEnum>()">
+                    aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="Education"></label>
+                <span asp-validation-for="Education" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-9">
+            <div class="form-floating">
+                <input required asp-for="Occupation" class="form-control" autocomplete="on" aria-required="true" />
+                <label asp-for="Occupation"></label>
+                <span asp-validation-for="Occupation" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-3">
+            <a href="@Url.Action("Personal", "Profile", new { id = Model.ProfileId})" class="w-100 btn btn-md btn-primary">Back</a>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-3">
+            @if (Model.CanEditProfile)
+            {
+                <button id="save" type="submit" class="w-100 btn btn-md btn-primary">Save & Continue</button>
+            }
+            else
+            {
+                <button id="continue" type="submit" class="w-100 btn btn-md btn-primary">Continue</button>
+            }
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+            $("#educationalLink").addClass("active");
+            if (!@Model.CanEditProfile.ToString().ToLower()) {
+                $("#EducationalForm").disableInput();
+            }
+        });
+    </script>
+}

@@ -1,0 +1,376 @@
+﻿@using SacredBond.Common.Enums
+@model SacredBond.App.Models.Home.HomeViewModel
+@{
+    ViewData["Title"] = "Home | " + AppUser.Name;
+}
+<div class="page-title-box">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h1 class="page-title">Welcome @AppUser.Name to Sacred Bond!</h1>
+            <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item active" aria-current="page"><a href="@Url.Action("Index", "Home")">Home</a></li>
+            </ol>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <section class="bg-white p-3 shadow-sm border widget">
+            <h4 class="widget-title">
+                <img src="/images/profile.png" title="Profile" />
+                Profile
+            </h4>
+            <hr />
+            <!--Messages based on whether someone has submitted their profile or not-->
+            @if (Model.IsPending)
+            {
+                <p>Complete your profile to start finding your spouse!</p>
+                <div class="progress mb-3" role="progressbar" aria-label="Pending Profile" aria-valuenow="@Model.CompletedPercentage" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar" style="width: @Model.CompletedPercentage%">@Model.CompletedPercentage%</div>
+                </div>
+
+                <a href="@Url.Action("Index","Profile", new { id = Model.ProfileId })" class="widget-action">
+                    <img src="/images/start.png" title="Start" />
+                    <div>
+                        Complete Profile
+                    </div>
+                </a>
+            }
+            else if (Model.ProfileStatus == SacredBond.Common.Enums.ProfileStatus.Submitted)
+            {
+                <p>Your profile will be reviewed by our staff within 24 to 48 hours.</p>
+                <div class="progress mb-3" role="progressbar" aria-label="Pending Profile" aria-valuenow="@Model.CompletedPercentage" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar bg-success" style="width: @Model.CompletedPercentage%">@Model.CompletedPercentage%</div>
+                </div>
+                <a href="@Url.Action("Index","Profile", new { id = Model.ProfileId })" class="widget-action">
+                    <img src="/images/view.png" title="View" />
+                    <div>
+                        View Profile
+                    </div>
+                </a>
+            }
+            else if (Model.ProfileStatus == ProfileStatus.Rejected)
+            {
+                <p>Your profile has been rejected. Please Correct Errors and Resubmit.</p>
+                <div class="progress mb-3" role="progressbar" aria-label="Pending Profile" aria-valuenow="@Model.CompletedPercentage" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar bg-danger" style="width: @Model.CompletedPercentage%">@Model.CompletedPercentage%</div>
+                </div>
+                <a href="@Url.Action("Index","Profile", new { id = Model.ProfileId })" class="widget-action">
+                    <img src="/images/view.png" title="View" />
+                    <div>
+                        Update Profile
+                    </div>
+                </a>
+            }
+            else if (Model.ProfileStatus == SacredBond.Common.Enums.ProfileStatus.Approved)
+            {
+                <p>Your profile has been approved. To update your profile, click below</p>
+                <a href="@Url.Action("Index","Profile", new { id = Model.ProfileId })" class="widget-action">
+                    <img src="/images/start.png" title="Start" />
+                    <div>
+                        View Profile
+                    </div>
+                </a>
+            }
+            
+        </section>
+    </div>
+    <div class="col-md-4">
+        <section class="bg-white p-3 shadow-sm border widget">
+            <h4>
+                <img src="/images/find-match.png" title="Find a Match" />
+                Find a Match!
+            </h4>
+            <hr />
+            <!--Messages based on whether someone has submitted their profile or not-->
+            @if (Model.ProfileStatus == ProfileStatus.Pending)
+            {
+                <p>Complete your profile to see personalized matches</p>
+                <div class="widget-actions-container">
+                    <div class="diabled-home-widget">
+                        <a class="widget-action">
+                            <img src="/images/start.png" title="Start" />
+                            <div>
+                                Start your find
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+            else if (Model.ProfileStatus == ProfileStatus.Submitted)
+            {
+                <p>Personalized matches will appear once your profile is approved.</p>
+                <div class="widget-actions-container">
+                    <div class="diabled-home-widget">
+                        <a class="widget-action">
+                            <img src="/images/start.png" title="Start" />
+                            <div>
+                                Start your find
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+            else if (Model.ProfileStatus == ProfileStatus.Rejected)
+            {
+                <p>You may not see personalized matches until your profile gets approved</p>
+                <div class="widget-actions-container">
+                    <div class="diabled-home-widget">
+                        <a class="widget-action">
+                            <img src="/images/start.png" title="Start" />
+                            <div>
+                                Start your find
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+            else if (Model.ProfileStatus == ProfileStatus.Approved)
+            {
+                <p>Your profile has been approved. See personalized matches here.</p>
+                <a href="@Url.Action("Index","ProfileSearch", new { profileId = Model.ProfileId })" class="widget-action">
+                    <img src="/images/start.png" title="Start" />
+                    <div>
+                        Start your Search
+                    </div>
+                </a>
+            }
+            
+
+        </section>
+    </div>
+    <div class="col-md-4">
+        <section class="bg-white p-3 shadow-sm border widget">
+            <h4>
+                <img src="/images/interested.png" title="People interested in you" />
+                People interested in you!
+            </h4>
+            <hr />
+            <!--Messages based on whether someone has submitted their profile or not-->
+            @if (Model.ProfileStatus == ProfileStatus.Pending)
+            {
+                <p>Complete your profile to see people interested in you</p>
+                <div class="widget-actions-container">
+                    <div class="diabled-home-widget">
+                        <a class="widget-action">
+                            <img src="/images/steps.png" title="List" />
+                            <div>
+                                View List
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+            else if (Model.ProfileStatus == ProfileStatus.Submitted)
+            {
+                <p>People interested in you will appear once your profile is approved.</p>
+                <div class="widget-actions-container">
+                    <div class="diabled-home-widget">
+                        <a class="widget-action">
+                            <img src="/images/steps.png" title="List" />
+                            <div>
+                                View List
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+            else if (Model.ProfileStatus == ProfileStatus.Rejected)
+            {
+                <p>You may not see who is interested until your profile gets approved</p>
+                <div class="widget-actions-container">
+                    <div class="diabled-home-widget">
+                        <a class="widget-action">
+                            <img src="/images/steps.png" title="List" />
+                            <div>
+                                View List
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+            else if (Model.ProfileStatus == ProfileStatus.Approved)
+            {
+                <p>Your profile has been approved. See who is interested here.</p>
+                <a class="widget-action">
+                    <img src="/images/steps.png" title="Start" />
+                    <div>
+                        View List
+                    </div>
+                </a>
+                <div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            @if (Model.InterestedIn.Current.Count > 0)
+                            {
+                                <p>Recent:</p>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            @if (Model.InterestedIn.Current.Count > 5) // current should be greater than 5 , but set to 1 for test only
+                            {
+                                <a href="" class="widget-action" data-bs-toggle="modal" data-bs-target="#MoreInterestsModal">
+                                    <img src="/images/more.png" title="Start" />
+                                    <div>
+                                        More
+                                    </div>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ol class="list-group">
+                                @for (int i = 0; i < (Model.InterestedIn.Current.Count < 5 ? Model.InterestedIn.Current.Count : 5); i++)
+                                {
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-2 me-auto">
+                                            <div class="fw-bold">
+                                                <a href="@Url.Action("MoreInfo","Admin", new { profileId = Model.ProfileId, personal = false })" class="profile-more-info">
+                                                    <div>
+                                                        Profile @Model.InterestedIn.Current[i].DisplayedProfileIdentifier
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            @($"{Model.InterestedIn.Current[i].Status} @ {Model.InterestedIn.Current[i].StatusChangedDate.ToLongDateString()}")
+                                        </div>
+                                    </li>
+                                }
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            @if (Model.InterestedIn.Historical.Count > 0)
+                            {
+                                <p>History:</p>
+
+                            }
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ol class="list-group">
+                                @for (int i = 0; i < Model.InterestedIn.Historical.Count; i++)
+                                {
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-2 me-auto">
+                                            <div class="fw-bold">
+                                                <a href="@Url.Action("MoreInfo","Admin", new { profileId = Model.ProfileId, personal = false })" class="profile-more-info">
+                                                    <div>
+                                                        Profile @Model.InterestedIn.Historical[i].DisplayedProfileIdentifier
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            @($"{Model.InterestedIn.Historical[i].Status} @ {Model.InterestedIn.Historical[i].StatusChangedDate.ToLongDateString()}")
+                                        </div>
+                                    </li>
+                                }
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            }
+            
+
+        </section>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="modal fade" style="height: 100%;width:100%;" id="MoreInterestsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">
+                        More Interested
+                    </h4>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <table class="w-full text-sm text-left text-gray-500" id="tblProfiles" style="width:100%">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-300">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    Profile
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Status
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Status Date
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.modal-content -->
+                <div class="modal-footer"></div>
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+
+            $('#tblProfiles').DataTable({
+                "serverSide": true,
+                "ajax": {
+                    url: "/Home/GetMoreInterestedIn",
+                    type: 'POST',
+                    "dataSrc": function (data) {
+                        return data.data;
+                    }
+                },
+                "columns": [
+                    {
+                        "data": "displayedProfileIdentifier",
+                        "name": "DisplayedProfileIdentifier",
+                        "render": function (data, type, row, meta) {
+                            return '<div class="fw-bold" > <a href="@Url.Action("MoreInfo","Admin", new { profileId = Model.ProfileId, personal = false })" class="profile-more-info" ><div>Profile ' + row.displayedProfileIdentifier + '</div></a></div>';
+                        }
+                    },
+                    {
+                        "data": "status",
+                        "name": "Status",
+                        "render": function (data, type, row, meta) {
+                            switch (row.status) {
+                                case @((int)InterestedInStatus.Completed):
+                                    return '@(InterestedInStatus.Completed.ToString())';
+                                case @((int)InterestedInStatus.Approved):
+                                    return '@(InterestedInStatus.Approved.ToString())';
+                                case @((int)InterestedInStatus.InReview):
+                                    return '@(InterestedInStatus.InReview.ToString())';
+                                case @((int)InterestedInStatus.Canceled):
+                                    return '@(InterestedInStatus.Canceled.ToString())';
+                                case @((int)InterestedInStatus.Rejected):
+                                    return '@(InterestedInStatus.Rejected.ToString())';
+                                case @((int)InterestedInStatus.Pending):
+                                    return '@(InterestedInStatus.Pending.ToString())';
+                            }
+                        }
+                    },
+                    {
+                        "data": "statusChangedDate",
+                        "name": "StatusChangedDate",
+                        "render": function (data, type, row, meta) {
+                            var date = new Date(row.statusChangedDate);
+                            return date.toLocaleDateString("en-US");
+                        }
+                    },
+                ],
+                "order": [[0, "desc"]]
+            }
+            );
+        });
+    </script>
+}

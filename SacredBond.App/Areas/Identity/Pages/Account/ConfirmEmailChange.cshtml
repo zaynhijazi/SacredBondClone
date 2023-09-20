@@ -1,0 +1,17 @@
+﻿@page
+@model ConfirmEmailChangeModel
+@{
+    ViewData["Title"] = "Confirm email change";
+}
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <section class="mt-5 bg-white p-5 shadow-sm border">
+            <h2>@ViewData["Title"]</h2>
+            <hr/>
+            <partial name="_StatusMessage" model="Model.StatusMessage" />
+        </section>
+    </div>
+    <div class="col-md-4"></div>
+</div>

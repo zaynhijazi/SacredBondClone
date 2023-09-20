@@ -1,0 +1,179 @@
+﻿@model SacredBond.App.Models.Profile.SummaryViewModel
+@{
+    ViewData["Title"] = "Summary";
+}
+<form id="SubmitForm" method="post" class="jumbotron">
+    <input asp-for="ProfileId" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-12">
+            @if (Model.IsPending)
+            {
+                if (Model.IsProfileCompleted)
+                {
+                    <p class="lead">
+                        <img src="~/images/check.png" height="36px" title="Check" /> All Profile Steps are complete
+                    </p>
+                    <p>
+                        Congratulations on completing all your profile steps!
+                    </p>
+                    <p>
+                        Before you submit your application, we kindly request you to review all the information you have entered and ensure its accuracy.
+                    </p>
+                    <p>
+                        Once you submit your application, A Sacred Bond Marriage Counselor will carefully review your application and reach out to you for a 30 - minute consultation.
+                    </p>
+                    <p>
+                        This consultation will provide an opportunity for us to get to know you better and understand your preferences in order to assist you in finding your perfect match.
+                    </p>
+                    <p>
+                        Thank you for choosing our service, and we look forward to embarking on this journey with you.
+                    </p>
+                }
+                else
+                {
+                    <p class="lead">Some steps are not complete</p>
+                    <p>
+                        Please ensure that all the required profile steps are completed before submitting your application.
+                        <br />It seems that there are some incomplete sections that need your attention.
+                        Taking the time to provide accurate and detailed information will greatly enhance your matchmaking experience.
+                        <br />If you have any questions or need assistance, our team at A Sacred Bond is here to help.
+                        <br />We value your commitment to finding a meaningful connection, and we look forward to receiving your completed profile soon.
+                        <br />
+                        <br />Thank you!
+
+                    </p>
+
+
+                    <div class="list-group">
+                        @if (!Model.IsPersonalCompleted)
+                        {
+                            <a href="@Url.Action("Personal","Profile", new { id = Model.ProfileId })" class="title">Personal information</a>
+                        }
+                        @if (!Model.IsEducationalProfessionalCompleted)
+                        {
+                            <a href="@Url.Action("EducationalProfessional","Profile", new { id = Model.ProfileId })" class="title">Educational & Professional</a>
+                        }
+                        @if (!Model.IsMaritalCompleted)
+                        {
+                            <a href="@Url.Action("Marital","Profile", new { id = Model.ProfileId })" class="title">Marital & Family</a>
+
+                        }
+                        @if (!Model.IsReligionCompleted)
+                        {
+                            <a href="@Url.Action("Religion","Profile", new { id = Model.ProfileId })" class="title">Religious Outlook & Practices</a>
+                        }
+                        @if (!Model.IsAboutCompleted)
+                        {
+                            <a href="@Url.Action("About","Profile", new { id = Model.ProfileId })" class="title">About Yourself</a>
+                        }
+                        @if (!Model.IsSpouseCompleted)
+                        {
+                            <a href="@Url.Action("Spouse","Profile", new { id = Model.ProfileId })" class="title">Spouse</a>
+                        }
+                        @if (!Model.IsHealthCompleted)
+                        {
+                            <a href="@Url.Action("Health","Profile", new { id = Model.ProfileId })" class="title">Health</a>
+                        }
+                        @if (!Model.IsFamilyCompleted)
+                        {
+                            <a href="@Url.Action("Family","Profile", new { id = Model.ProfileId })" class="title">Family</a>
+                        }
+                        @if (!Model.IsFinanceCompleted)
+                        {
+                            <a href="@Url.Action("Finance","Profile", new { id = Model.ProfileId })" class="title">Finance</a>
+                        }
+                        @if (!Model.IsContactCompleted)
+                        {
+                            <a href="@Url.Action("Contact","Profile", new { id = Model.ProfileId })" class="title">Communication</a>
+                        }
+
+                    </div>
+                }
+            }
+            else if (Model.IsSubmitted)
+            {
+                <p>
+                    Profile Review in Progress: Our dedicated team will review your profile within 24 to 48 hours.
+                    This careful review is a crucial step on your journey towards a meaningful connection.
+                    We appreciate your patience as we work to offer you the best experience. Rest assured,
+                    your profile's review guides us in tailoring matches according to your preferences.
+                </p>
+
+                <p>
+                    Edit with Ease: Feel free to edit your profile at any time. However, to ensure that your changes
+                    are considered in the review process, remember to Back and hit <b>'Submit'.</b> Your active involvement
+                    helps us refine the matchmaking experience we provide, aligning with your aspirations and desires.
+                </p>
+            }
+            else if (Model.IsRejected)
+            {
+                <p>
+                    Your profile has been rejected due to certain errors or incomplete information.
+                    To enhance your matchmaking experience, your profile requires corrections before it can be considered for potential matches.
+                </p>
+                <div class="alert alert-danger" role="alert">
+                    <p class="mb-0">@Model.RejectReason</p>
+                </div>
+            } else if (Model.IsApproved)
+            {
+                <p>
+                    To ensure your profile remains accurate and up-to-date, you have the ability to edit it at any time.
+                    However, please note that any changes made will require you to submit your profile for approval again. 
+                    During the editing process, your profile won't be visible to other users, 
+                    ensuring that the information shared is consistent and reliable.
+                </p>
+                
+            }
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-3">
+            <a href="@Url.Action("Contact", "Profile", new { id = Model.ProfileId})" class="w-100 btn btn-md btn-primary">Back</a>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-3">
+            @if (Model.IsPending || Model.IsRejected)
+            {
+                <button id="save" type="submit" class="w-100 btn btn-md btn-primary">Submit Profile</button>
+            }
+            else
+            {
+                <a id="edit" class="w-100 btn btn-md btn-primary" data-bs-toggle="modal" data-bs-target="#edit-profile-modal">Edit Profile</a>
+                <!-- Modal -->
+                <div class="modal fade" id="edit-profile-modal" tabindex="-1" aria-labelledby="edit-profile-label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="edit-profile-label">Edit Profile</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    <b>Important:</b> Before Proceeding with Profile Editing
+                                </p>
+                                <p>
+                                    Please note that any profile changes will need to be submitted again for staff review.
+                                    Your updated profile will only be considered after resubmission. Thank you for your attention to this process.
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            $("#summaryLink").addClass("active");
+        });
+    </script>
+}

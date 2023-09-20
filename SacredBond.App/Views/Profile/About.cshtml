@@ -1,0 +1,214 @@
+﻿@using SacredBond.Common.Enums
+@model SacredBond.App.Models.Profile.AboutViewModel
+
+@{
+    ViewData["Title"] = "About Yourself";
+}
+
+<form id="AboutForm" method="post">
+    <input asp-for="ProfileId" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="ActiveEnergetic" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                    aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="ActiveEnergetic"></label>
+                <span asp-validation-for="ActiveEnergetic" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="Adaptable" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                    aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="Adaptable"></label>
+                <span asp-validation-for="Adaptable" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="Sensitive" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                    aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="Sensitive"></label>
+                <span asp-validation-for="Sensitive" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="Flexible" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                    aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="Flexible"></label>
+                <span asp-validation-for="Flexible" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="LaidBack" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                    aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="LaidBack"></label>
+                <span asp-validation-for="LaidBack" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="Patient" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                    aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="Patient"></label>
+                <span asp-validation-for="Patient" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="Practical" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                    aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="Practical"></label>
+                <span asp-validation-for="Practical" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="Private" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                    aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="Private"></label>
+                <span asp-validation-for="Private" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="Shy" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                    aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="Shy"></label>
+                <span asp-validation-for="Shy" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="Social" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<AllSomeNot>()">
+                    aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="Social"></label>
+                <span asp-validation-for="Social" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-12">
+            <div class="form-floating">
+                <textarea required asp-for="ShareAboutYourself" class="form-control" autocomplete="on" aria-required="true"></textarea>
+                <label asp-for="ShareAboutYourself"></label>
+                <span asp-validation-for="ShareAboutYourself" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-floating">
+                <textarea required asp-for="DescribeTypicalDay" class="form-control" autocomplete="on" aria-required="true"></textarea>
+                <label asp-for="DescribeTypicalDay"></label>
+                <span asp-validation-for="DescribeTypicalDay" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-floating">
+                <textarea required asp-for="ShortTermGoals" class="form-control" autocomplete="on" aria-required="true"></textarea>
+                <label asp-for="ShortTermGoals"></label>
+                <span asp-validation-for="ShortTermGoals" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-floating">
+                <textarea required asp-for="LongTermGoals" class="form-control" autocomplete="on" aria-required="true"></textarea>
+                <label asp-for="LongTermGoals"></label>
+                <span asp-validation-for="LongTermGoals" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-floating">
+                <textarea required asp-for="HobbiesAndActivities" class="form-control" autocomplete="on" aria-required="true"></textarea>
+                <label asp-for="HobbiesAndActivities"></label>
+                <span asp-validation-for="HobbiesAndActivities" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-3">
+            <a href="@Url.Action("Religion", "Profile", new { id = Model.ProfileId})" class="w-100 btn btn-md btn-primary">Back</a>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-3">
+            @if (Model.CanEditProfile)
+            {
+                <button id="save" type="submit" class="w-100 btn btn-md btn-primary">Save & Continue</button>
+            } 
+            else
+            {
+                <button id="continue" type="submit" class="w-100 btn btn-md btn-primary">Continue</button>
+            }
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            $("#aboutLink").addClass("active");
+            if (!@Model.CanEditProfile.ToString().ToLower()) {
+                $("#AboutForm").disableInput();
+            }
+        });
+    </script>
+}

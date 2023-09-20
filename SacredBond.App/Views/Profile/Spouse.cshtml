@@ -1,0 +1,281 @@
+﻿@using SacredBond.Common.Enums
+@model SacredBond.App.Models.Profile.SpouseViewModel
+
+@{
+    ViewData["Title"] = "What are you looking for in your spouse?";
+}
+
+<form id="SpouseForm" method="post">
+    <input asp-for="ProfileId" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="WantSpouseActiveEnergetic" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<AllSomeNot>()" aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="WantSpouseActiveEnergetic"></label>
+                <span asp-validation-for="WantSpouseActiveEnergetic" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="WantSpouseAdaptable" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<AllSomeNot>()" aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="WantSpouseAdaptable"></label>
+                <span asp-validation-for="WantSpouseAdaptable" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="WantSpouseSensitive" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<AllSomeNot>()" aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="WantSpouseSensitive"></label>
+                <span asp-validation-for="WantSpouseSensitive" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="WantSpouseFlexible" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<AllSomeNot>()" aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="WantSpouseFlexible"></label>
+                <span asp-validation-for="WantSpouseFlexible" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="WantSpouseLaidBack" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<AllSomeNot>()" aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="WantSpouseLaidBack"></label>
+                <span asp-validation-for="WantSpouseLaidBack" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="WantSpousePatient" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<AllSomeNot>()" aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="WantSpousePatient"></label>
+                <span asp-validation-for="WantSpousePatient" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="WantSpousePractical" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<AllSomeNot>()" aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="WantSpousePractical"></label>
+                <span asp-validation-for="WantSpousePractical" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="WantSpousePrivate" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<AllSomeNot>()" aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="WantSpousePrivate"></label>
+                <span asp-validation-for="WantSpousePrivate" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="WantSpouseShy" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<AllSomeNot>()" aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="WantSpouseShy"></label>
+                <span asp-validation-for="WantSpouseShy" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="WantSpouseSocial" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<AllSomeNot>()" aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="WantSpouseSocial"></label>
+                <span asp-validation-for="WantSpouseSocial" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-6">
+            <div class="form-floating">
+                <input required type="number" asp-for="MinimumSpouseAge" class="form-control" autocomplete="on" aria-required="true"></input>
+                <label asp-for="MinimumSpouseAge"></label>
+                <span asp-validation-for="MinimumSpouseAge" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating">
+                <input required type="number" asp-for="MaximumSpouseAge" class="form-control" autocomplete="on" aria-required="true"></input>
+                <label asp-for="MaximumSpouseAge"></label>
+                <span asp-validation-for="MaximumSpouseAge" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="SpouseMaritalStatuses" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<SpouseMaritalStatuses>()" aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="SpouseMaritalStatuses"></label>
+                <span asp-validation-for="SpouseMaritalStatuses" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-floating">
+                <select required asp-for="ConsiderSpouseWithChildren" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<YesNoMaybeOptions>()" aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="ConsiderSpouseWithChildren"></label>
+                <span asp-validation-for="ConsiderSpouseWithChildren" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-floating">
+                <textarea required asp-for="LookingForInSpouse" class="form-control" autocomplete="on" aria-required="true"></textarea>
+                <label asp-for="LookingForInSpouse"></label>
+                <span asp-validation-for="LookingForInSpouse" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.Gender == Genders.Female)
+    {
+        <hr />
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-floating">
+                    <select required asp-for="DoYouHaveAWali" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<WaliOptions>()" aria-required="true" onchange="onHasWaliChanged(this)">
+                        <option selected></option>
+                    </select>
+                    <label asp-for="DoYouHaveAWali"></label>
+                    <span asp-validation-for="DoYouHaveAWali" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div style="display:none;" id="WaliInforamtionDiv">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input required asp-for="WaliName" class="form-control" autocomplete="on" aria-required="true" />
+                        <label asp-for="WaliName"></label>
+                        <span asp-validation-for="WaliName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input required asp-for="WaliRelationship" class="form-control" autocomplete="on" aria-required="true" />
+                        <label asp-for="WaliRelationship"></label>
+                        <span asp-validation-for="WaliRelationship" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input required type="email" asp-for="WaliEmail" class="form-control" autocomplete="on" aria-required="true" />
+                        <label asp-for="WaliEmail"></label>
+                        <span asp-validation-for="WaliEmail" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input required type="number" asp-for="WaliPhone" class="form-control" autocomplete="on" aria-required="true" />
+                        <label asp-for="WaliPhone"></label>
+                        <span asp-validation-for="WaliPhone" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <hr />
+    <div class="row">
+        <div class="col-3">
+            <a href="@Url.Action("About", "Profile", new { id = Model.ProfileId})" class="w-100 btn btn-md btn-primary">Back</a>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-3">
+            @if (Model.CanEditProfile)
+            {
+                <button id="save" type="submit" class="w-100 btn btn-md btn-primary">Save & Continue</button>
+            }
+            else
+            {
+                <button id="continue" type="submit" class="w-100 btn btn-md btn-primary">Continue</button>
+            }
+        </div>
+    </div>
+</form>
+
+
+@section Scripts{
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            var haveWaliValue = $('#DoYouHaveAWali').find("option:selected").val();
+            if (haveWaliValue == '@((int)WaliOptions.IHaveAWali)') {
+                $('#WaliInforamtionDiv').show();
+            }
+            $("#spouseLink").addClass("active");
+            if (!@Model.CanEditProfile.ToString().ToLower()) {
+                $("#SpouseForm").disableInput();
+            }
+        });
+
+
+        function onHasWaliChanged(ele) {
+            var selected = $(ele).find("option:selected").val();
+            //alert('selected: ' + selected);
+            if (selected == '0') {
+                $('#WaliInforamtionDiv').show();
+            }
+            else {
+                $('#WaliInforamtionDiv').hide();
+                $('#WaliName').val('');
+                $('#WaliRelationship').val('');
+                $('#WaliEmail').val('');
+                $('#WaliPhone').val('');
+            }
+        }
+    </script>
+}

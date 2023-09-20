@@ -1,0 +1,73 @@
+﻿@using SacredBond.App.Helpers;
+@using SacredBond.App.Models.ProfileSearch;
+@model PaginatedList<ProfileResultViewModel>
+
+<table class="table" id="tblProfiles">
+    <tr>
+        <th>
+            ProfileId
+        </th>
+        <th>
+            Age
+        </th>
+        <th>
+            State
+        </th>
+        <th>
+            City
+        </th>
+        <th>
+            About
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="@Url.Action("MoreInfo", "ProfileSearch", new {profileId = item.ProfileId})" >
+                    @Html.DisplayFor(modelItem => item.ProfileId)
+                </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShareAboutYourself)
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+Showing @(Model.TotalPages < Model.PageIndex ? 0 : Model.PageIndex) to @Model.TotalPages of @Model.TotalCount entries
+
+<nav>
+    <ul class="pagination">
+        <li class="page-item">
+            <a id="previous" class="btn btn-default @prevDisabled">
+                Previous
+            </a>
+        </li>
+        <li class="page-item">
+            <a id="next" class="btn btn-default @nextDisabled">
+                Next
+            </a>
+        </li>
+    </ul>
+</nav>
+
+

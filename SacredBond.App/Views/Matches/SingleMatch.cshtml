@@ -1,0 +1,622 @@
+﻿@using SacredBond.Common.Enums
+@model SacredBond.App.Models.Matches.ProfileSingleMatchViewModel
+@{
+    ViewData["Title"] = "Spouse Info";
+}
+
+<div class="accordion row" id="accordion">
+    <div class="card">
+        <div class="card-header" id="heading2">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#educationData" aria-expanded="false" aria-controls="educationData">
+                    Educational & Professional Background
+                </button>
+            </h5>
+        </div>
+        <div id="educationData" class="collapse" aria-labelledby="heading2" data-parent="#accordion">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input disabled asp-for="EducationalProfessionalViewModel.Education" class="form-control" />
+                            <label asp-for="EducationalProfessionalViewModel.Education"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input disabled asp-for="EducationalProfessionalViewModel.Occupation" class="form-control" />
+                            <label asp-for="EducationalProfessionalViewModel.Occupation"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" id="heading3">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#maritalData" aria-expanded="false" aria-controls="maritalData">
+                    Marital and Family Background
+                </button>
+            </h5>
+        </div>
+        <div id="maritalData" class="collapse" aria-labelledby="heading3" data-parent="#accordion">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-floating">
+                            <input disabled asp-for="MaritalViewModel.MaritalStatus" class="form-control" />
+                            <label asp-for="MaritalViewModel.MaritalStatus"></label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-floating">
+                            <input disabled asp-for="MaritalViewModel.HasChildren" class="form-control" />
+                            <label asp-for="MaritalViewModel.HasChildren"></label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-floating">
+                            <input disabled asp-for="MaritalViewModel.NumberOfChildren" class="form-control" />
+                            <label asp-for="MaritalViewModel.NumberOfChildren"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" id="heading4">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#religionData" aria-expanded="false" aria-controls="religionData">
+                    Religious Outlook and Practices
+                </button>
+            </h5>
+        </div>
+        <div id="religionData" class="collapse" aria-labelledby="heading4" data-parent="#accordion">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <input disabled asp-for="ReligionViewModel.ReligionImportance" class="form-control" />
+                            <label asp-for="ReligionViewModel.ReligionImportance"></label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <input disabled asp-for="ReligionViewModel.DoYouPray5Times" class="form-control" />
+                            <label asp-for="ReligionViewModel.DoYouPray5Times"></label>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.PersonalViewModel.Gender == Genders.Female)
+                {
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <input disabled asp-for="ReligionViewModel.WearsHijab" class="form-control" />
+                            <label asp-for="ReligionViewModel.WearsHijab"></label>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <input disabled asp-for="ReligionViewModel.HasBeard" class="form-control" />
+                            <label asp-for="ReligionViewModel.HasBeard"></label>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" id="heading5">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#aboutData" aria-expanded="false" aria-controls="aboutData">
+                    About Yourself
+                </button>
+            </h5>
+        </div>
+        <div id="aboutData" class="collapse" aria-labelledby="heading5" data-parent="#accordion">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input disabled asp-for="AboutViewModel.ActiveEnergetic" class="form-control" />
+                            <label asp-for="AboutViewModel.ActiveEnergetic"></label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <div class="form-floating">
+                                <input disabled asp-for="AboutViewModel.Adaptable" class="form-control" />
+                                <label asp-for="AboutViewModel.Adaptable"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input disabled asp-for="AboutViewModel.Sensitive" class="form-control" />
+                            <label asp-for="AboutViewModel.Sensitive"></label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input disabled asp-for="AboutViewModel.Flexible" class="form-control" />
+                            <label asp-for="AboutViewModel.Flexible"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input disabled asp-for="AboutViewModel.LaidBack" class="form-control" />
+                            <label asp-for="AboutViewModel.LaidBack"></label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input disabled asp-for="AboutViewModel.Patient" class="form-control" />
+                            <label asp-for="AboutViewModel.Patient"></label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <div class="form-floating">
+                                <input disabled asp-for="AboutViewModel.Practical" class="form-control" />
+                                <label asp-for="AboutViewModel.Practical"></label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input disabled asp-for="AboutViewModel.Private" class="form-control" />
+                            <label asp-for="AboutViewModel.Private"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input disabled asp-for="AboutViewModel.Shy" class="form-control" />
+                            <label asp-for="AboutViewModel.Shy"></label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input disabled asp-for="AboutViewModel.Social" class="form-control" />
+                            <label asp-for="AboutViewModel.Social"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input disabled asp-for="AboutViewModel.ShareAboutYourself" class="form-control" />
+                            <label asp-for="AboutViewModel.ShareAboutYourself"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input disabled asp-for="AboutViewModel.DescribeTypicalDay" class="form-control" />
+                            <label asp-for="AboutViewModel.DescribeTypicalDay"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input disabled asp-for="AboutViewModel.ShortTermGoals" class="form-control" />
+                            <label asp-for="AboutViewModel.ShortTermGoals"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input disabled asp-for="AboutViewModel.LongTermGoals" class="form-control" />
+                            <label asp-for="AboutViewModel.LongTermGoals"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input disabled asp-for="AboutViewModel.HobbiesAndActivities" class="form-control" />
+                            <label asp-for="AboutViewModel.HobbiesAndActivities"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" id="heading6">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#spouseData" aria-expanded="false" aria-controls="spouseData">
+                    What are you looking for in your spouse?
+                </button>
+            </h5>
+        </div>
+        <div id="spouseData" class="collapse" aria-labelledby="heading6" data-parent="#accordion">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input disabled asp-for="SpouseViewModel.WantSpouseActiveEnergetic" class="form-control" />
+                            <label asp-for="SpouseViewModel.WantSpouseActiveEnergetic"></label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <div class="form-floating">
+                                <input disabled asp-for="SpouseViewModel.WantSpouseAdaptable" class="form-control" />
+                                <label asp-for="SpouseViewModel.WantSpouseAdaptable"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input disabled asp-for="SpouseViewModel.WantSpouseSensitive" class="form-control" />
+                            <label asp-for="SpouseViewModel.WantSpouseSensitive"></label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input disabled asp-for="SpouseViewModel.WantSpouseFlexible" class="form-control" />
+                            <label asp-for="SpouseViewModel.WantSpouseFlexible"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input disabled asp-for="SpouseViewModel.WantSpouseLaidBack" class="form-control" />
+                            <label asp-for="SpouseViewModel.WantSpouseLaidBack"></label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input disabled asp-for="SpouseViewModel.WantSpousePatient" class="form-control" />
+                            <label asp-for="SpouseViewModel.WantSpousePatient"></label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <div class="form-floating">
+                                <input disabled asp-for="SpouseViewModel.WantSpousePractical" class="form-control" />
+                                <label asp-for="SpouseViewModel.WantSpousePractical"></label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input disabled asp-for="SpouseViewModel.WantSpousePrivate" class="form-control" />
+                            <label asp-for="SpouseViewModel.WantSpousePrivate"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input disabled asp-for="SpouseViewModel.WantSpouseShy" class="form-control" />
+                            <label asp-for="SpouseViewModel.WantSpouseShy"></label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input disabled asp-for="SpouseViewModel.WantSpouseSocial" class="form-control" />
+                            <label asp-for="SpouseViewModel.WantSpouseSocial"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <input disabled asp-for="SpouseViewModel.MinimumSpouseAge" class="form-control" />
+                            <label asp-for="SpouseViewModel.MinimumSpouseAge"></label>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <input disabled asp-for="SpouseViewModel.MaximumSpouseAge" class="form-control" />
+                            <label asp-for="SpouseViewModel.MaximumSpouseAge"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <input disabled asp-for="SpouseViewModel.SpouseMaritalStatuses" class="form-control" />
+                            <label asp-for="SpouseViewModel.SpouseMaritalStatuses"></label>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <input disabled asp-for="SpouseViewModel.ConsiderSpouseWithChildren" class="form-control" />
+                            <label asp-for="SpouseViewModel.ConsiderSpouseWithChildren"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input disabled asp-for="SpouseViewModel.LookingForInSpouse" class="form-control" />
+                            <label asp-for="SpouseViewModel.LookingForInSpouse"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" id="heading7">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#healthData" aria-expanded="false" aria-controls="healthData">
+                    Health
+                </button>
+            </h5>
+        </div>
+        <div id="healthData" class="collapse" aria-labelledby="heading7" data-parent="#accordion">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <input disabled asp-for="HealthViewModel.HaveHealthIssues" class="form-control" />
+                            <label asp-for="HealthViewModel.HaveHealthIssues"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input disabled asp-for="HealthViewModel.HealthIssues" class="form-control" />
+                            <label asp-for="HealthViewModel.HealthIssues"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input disabled asp-for="HealthViewModel.PhysicalImpediments" class="form-control" />
+                            <label asp-for="HealthViewModel.PhysicalImpediments"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" id="heading8">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#familyData" aria-expanded="false" aria-controls="familyData">
+                    Family
+                </button>
+            </h5>
+        </div>
+        <div id="familyData" class="collapse" aria-labelledby="heading8" data-parent="#accordion">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input disabled asp-for="FamilyViewModel.LiveWithFamilyPostMarriage" class="form-control" />
+                            <label asp-for="FamilyViewModel.LiveWithFamilyPostMarriage"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" id="heading9">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#financeData" aria-expanded="false" aria-controls="financeData">
+                    Finance
+                </button>
+            </h5>
+        </div>
+        <div id="financeData" class="collapse" aria-labelledby="heading9" data-parent="#accordion">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <input disabled asp-for="FinanceViewModel.FinancesHandlingAfterMarriage" class="form-control" />
+                            <label asp-for="FinanceViewModel.FinancesHandlingAfterMarriage"></label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <input disabled asp-for="FinanceViewModel.HasDebts" class="form-control" />
+                            <label asp-for="FinanceViewModel.HasDebts"></label>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.PersonalViewModel.Gender == Genders.Female)
+                {
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-floating">
+                                <input disabled asp-for="FinanceViewModel.HusbandSoleProvider" class="form-control" />
+                                <label asp-for="FinanceViewModel.HusbandSoleProvider"></label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating">
+                                <input disabled asp-for="FinanceViewModel.WantToWorkAfterMarriage" class="form-control" />
+                                <label asp-for="FinanceViewModel.WantToWorkAfterMarriage"></label>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-floating">
+                                <input disabled asp-for="FinanceViewModel.WifeContributeFinancially" class="form-control" />
+                                <label asp-for="FinanceViewModel.WifeContributeFinancially"></label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating">
+                                <input disabled asp-for="FinanceViewModel.WantWifeToWorkAfterMarriage" class="form-control" />
+                                <label asp-for="FinanceViewModel.WantWifeToWorkAfterMarriage"></label>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" id="heading10">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#communicationData" aria-expanded="false" aria-controls="communicationData">
+                    Communication
+                </button>
+            </h5>
+        </div>
+        <div id="communicationData" class="collapse" aria-labelledby="heading10" data-parent="#accordion">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <input disabled asp-for="ContactViewModel.BestWayToContact" class="form-control" />
+                            <label asp-for="ContactViewModel.BestWayToContact"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <div class="form-floating">
+                                <input disabled asp-for="ContactViewModel.ShareInfoWithMatches" class="form-control" />
+                                <label asp-for="ContactViewModel.ShareInfoWithMatches"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <input disabled asp-for="ContactViewModel.HasDomesticViolenceHistory" class="form-control" />
+                            <label asp-for="ContactViewModel.HasDomesticViolenceHistory"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+
+@if (Model.IntrestedInStatus == InterestedInStatus.Pending)
+{
+    <form id="handleMatchForm" method="post">
+        <input asp-for="SpouseId" type="hidden" />
+        <input name="status" id="status" type="hidden" />
+        <input name="oldStatus" id="oldStatus" type="hidden" />
+        <input name="recipientEmail" id="recipientEmail" type="hidden" />
+        
+        <div class="row">
+            <div class="col-6"></div>
+            <div class="col-3">
+                <button id="btnApprove" type="button"
+                    data-bs-toggle="modal" data-bs-target="#confirmationModal"
+                    class="w-100 btn btn-lg btn-primary">
+                    Approve
+                </button>
+
+                <!-- Modal -->
+                <partial name="../Shared/_ConfirmationModal.cshtml"
+                     model="@(new ConfirmationViewModel{
+                                ModalId ="confirmationModal",
+                                ModalActionText = "Ok",
+                                Title="Approve",
+                                Message="Are you sure you want to approve?"})" />
+            </div>
+            <div class="col-3">
+                <button id="btnReject" type="button"
+                    data-bs-toggle="modal" data-bs-target="#rejectConfirmationModal"
+                    class="w-100 btn btn-lg  btn-danger">
+                    Reject
+                </button>
+
+                <!-- Modal -->
+                <partial name="../Shared/_ConfirmationModal.cshtml"
+                     model="@(new ConfirmationViewModel{
+                                ModalId ="rejectConfirmationModal",
+                                ModalActionText = "Ok",
+                                Title="Reject",
+                                Message="Are you sure you want to reject?"})" />
+
+            </div>
+        </div>
+    </form>
+}
+
+
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+
+            var frm = $('#handleMatchForm');
+            var url = '@Url.Action("Index", "Matches")';
+            var oldStatus = '@Model.IntrestedInStatus';
+
+            $("#rejectConfirmationModal").on("click", ".btn-primary", function () {
+                $('#recipientEmail').val('@Model.PersonalViewModel.Email');
+                $('#status').val('@InterestedInStatus.Rejected');
+            });
+
+
+            $("#confirmationModal").on("click", ".btn-primary", function () {
+                $('#status').val('@InterestedInStatus.Approved');
+            });
+
+            frm.submit(function (e) {
+                e.preventDefault(e);
+                $.ajax({
+                    async: true,
+                    type: frm.attr('method'),
+                    url: "/Admin/UpdateMatchStatus",
+                    data: frm.serialize(), //formData,
+                    cache: false,
+                    processData: false,
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // optional
+                    //contentType: 'application/json',
+                    success: function (data) {
+                        window.location.href = url;
+                    },
+                    error: function (request, status, error) {
+                        alert(`error in updating application status ${error}`)
+                    }
+                });
+            });
+        });
+    </script>
+}

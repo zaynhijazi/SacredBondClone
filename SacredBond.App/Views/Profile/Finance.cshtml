@@ -1,0 +1,125 @@
+﻿@using SacredBond.Common.Enums
+@model SacredBond.App.Models.Profile.FinanceViewModel
+
+@{
+    ViewData["Title"] = "Finance";
+}
+
+<form id="FinanceForm" method="post">
+    <input asp-for="ProfileId" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-9">
+            <div class="form-floating">
+                <select required asp-for="FinancesHandlingAfterMarriage" class="form-select" autocomplete="on"
+                        asp-items="Html.GetEnumSelectList<FinancesHandlingAfterMarriageOptions>()" aria-required="true">
+                    <option selected></option>
+                </select>
+                <label asp-for="FinancesHandlingAfterMarriage"></label>
+                <span asp-validation-for="FinancesHandlingAfterMarriage" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.Gender == Genders.Female)
+    {
+        <div class="row">
+            <div class="col-9">
+                <div class="form-floating">
+                    <select required asp-for="HusbandSoleProvider" type="text" class="form-select" autocomplete="on">
+                        <option selected></option>
+                        <option id="child-yes" value="true">Yes</option>
+                        <option id="child-no" value="false">No</option>
+                    </select>
+                    <label asp-for="HusbandSoleProvider"></label>
+                    <span asp-validation-for="HusbandSoleProvider" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-9">
+                <div class="form-floating">
+                    <select required asp-for="WantToWorkAfterMarriage" class="form-select" autocomplete="on"
+                            asp-items="Html.GetEnumSelectList<YesNoMaybeOptions>()" aria-required="true">
+                        <option selected></option>
+                    </select>
+                    <label asp-for="WantToWorkAfterMarriage"></label>
+                    <span asp-validation-for="WantToWorkAfterMarriage" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-9">
+                <div class="form-floating">
+                    <select required asp-for="WifeContributeFinancially" type="text" class="form-select" autocomplete="on">
+                        <option selected></option>
+                        <option id="child-yes" value="true">Yes</option>
+                        <option id="child-no" value="false">No</option>
+                    </select>
+                    <label asp-for="WifeContributeFinancially"></label>
+                    <span asp-validation-for="WifeContributeFinancially" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-9">
+                <div class="form-floating">
+                    <select required asp-for="WantWifeToWorkAfterMarriage" class="form-select" autocomplete="on"
+                            asp-items="Html.GetEnumSelectList<YesNoMaybeOptions>()" aria-required="true">
+                        <option selected></option>
+                    </select>
+                    <label asp-for="WantWifeToWorkAfterMarriage"></label>
+                    <span asp-validation-for="WantWifeToWorkAfterMarriage" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-9">
+            <div class="form-floating">
+                <select required asp-for="HasDebts" type="text" class="form-select" autocomplete="on">
+                    <option selected></option>
+                    <option id="child-yes" value="true">Yes</option>
+                    <option id="child-no" value="false">No</option>
+                </select>
+                <label asp-for="HasDebts"></label>
+                <span asp-validation-for="HasDebts" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+    <div class="row">
+        <div class="col-3">
+            <a href="@Url.Action("Family", "Profile", new { id = Model.ProfileId})" class="w-100 btn btn-md btn-primary">Back</a>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-3">
+            @if (Model.CanEditProfile)
+            {
+                <button id="save" type="submit" class="w-100 btn btn-md btn-primary">Save & Continue</button>
+            }
+            else
+            {
+                <button id="continue" type="submit" class="w-100 btn btn-md btn-primary">Continue</button>
+            }
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            $("#financeLink").addClass("active");
+            if (!@Model.CanEditProfile.ToString().ToLower()) {
+                $("#FinanceForm").disableInput();
+            }
+        });
+    </script>
+}
