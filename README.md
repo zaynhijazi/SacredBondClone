@@ -188,5 +188,78 @@ To update the database schema, follow these steps in your terminal:
 
 Make sure to perform these steps after making any changes to your Entity Framework Core migrations or database schema.
 
+## Running SacredBondFaker
+
+To run the SacredBondFaker project, follow these steps in your terminal:
+
+1. **Open Your Terminal**:
+   - Open a terminal window on your computer.
+
+2. **Navigate to the Repository Directory**:
+   - Use the `cd` (Change Directory) command to navigate to the directory where you cloned the GitHub repository. For example:
+     ```bash
+     cd path/to/your/cloned/repo
+     ```
+
+3. **Navigate to the SacredBondFaker Directory**:
+   - Within the repository directory, navigate to the "SacredBondFaker" directory using the `cd` command:
+     ```bash
+     cd SacredBondFaker
+     ```
+
+4. **Build the Project**:
+   - To build the project and generate the necessary executable files, use the `dotnet build` command:
+     ```bash
+     dotnet build
+     ```
+
+5. **Run the Project**:
+   - Execute the project by running the following command:
+     ```bash
+     dotnet run
+     ```
+
+   This will run the SacredBondFaker project, and any output or results will be displayed in the terminal.
+
+Make sure you have the .NET SDK installed on your computer to use these commands.
+
+## Testing Profile Picture Setup
+
+To test the profile picture setup feature, follow these steps:
+
+1. **Open the Solution**:
+   - Double-click the "SacredBond.App.sln" file located in the repository directory (the directory of your cloned repo). This will open the solution in your preferred development environment.
+
+2. **Run the Application**:
+   - Once the solution is open, run the application by clicking on the play button or using your development environment's build and run commands.
+
+3. **Handling "This page is not working"**:
+   - If you encounter a "This page is not working" error on your screen, change the URL in the address bar to:
+     ```
+     https://localhost:7015/Identity/Account/Logout
+     ```
+
+4. **Log In with Fake Accounts**:
+   - Log in using one of the fake accounts created by "SacredBondFaker." You will both of these fake accounts in your local database. For example:
+     - Username: Colleen27@yahoo.com
+     - Password: Welcome8890!
+     - Alternatively, you can use the following fake account:
+       - Username: Danny28@gmail.com
+
+5. **Complete Profile**:
+   - After logging in, navigate to the "Profile" section.
+   - Click on the "Complete Profile" button.
+
+6. **Profile Picture Setup**:
+   - Within the profile setup, locate the "Profile Picture Setup" section.
+   - Upload at least 3 pictures.
+
+7. **Verify Picture Upload**:
+   - To ensure the pictures were uploaded successfully, revisit the "Profile Picture Setup" section.
+
+This process allows you to test the profile picture setup functionality within the SacredBond application.
+
+
+
 
 
