@@ -222,7 +222,7 @@ To run the SacredBondFaker project, follow these steps in your terminal:
    This will run the SacredBondFaker project, and any output or results will be displayed in the terminal.
 
 Make sure you have the .NET SDK installed on your computer to use these commands.
-
+#Features added by Zayn
 ## Testing Profile Picture Setup
 
 To test the profile picture setup feature, follow these steps:
