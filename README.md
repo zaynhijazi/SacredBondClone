@@ -1,5 +1,39 @@
 # SacredBond.App
+Before proceeding with the setup, make sure to install the required NuGet packages for each project in the solution. You should run the `dotnet restore` command in the respective directories of the projects to download the necessary packages defined in their `.csproj` files.
 
+1. **SacredBond.App**:
+   - Navigate to the "SacredBond.App" directory in your terminal.
+   - Run the following command to restore NuGet packages:
+     ```
+     cd SacredBond.App
+     dotnet restore
+     ```
+
+2. **SacredBond.Common**:
+   - Navigate to the "SacredBond.Common" directory in your terminal.
+   - Run the following command to restore NuGet packages:
+     ```
+     cd SacredBond.Common
+     dotnet restore
+     ```
+
+3. **SacredBond.Core**:
+   - Navigate to the "SacredBond.Core" directory in your terminal.
+   - Run the following command to restore NuGet packages:
+     ```
+     cd SacredBond.Core
+     dotnet restore
+     ```
+
+4. **SacredBondFaker**:
+   - Navigate to the "SacredBondFaker" directory in your terminal.
+   - Run the following command to restore NuGet packages:
+     ```
+     cd SacredBondFaker
+     dotnet restore
+     ```
+
+Ensure that
 ## EFCore and SQL Server Set up for Mac Users
 This tutorial applies to all regardless of the processor they have: Intel/M1 and above. This text assumes that you have .NETCore installed because dotnet cli comes packaged with it. Moreover, before reading the rest of the text, make sure to download Docker and Azure Data Studio. 
 
