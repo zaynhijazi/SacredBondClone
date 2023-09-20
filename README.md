@@ -158,5 +158,35 @@ To configure connection strings in your projects, follow based on your operating
 - **SacredBondFaker** (for Windows Users):
    - Open the `**appsettings.json`** file in the **"SacredBondFaker"** project.
    - Use the connection string provided during the installation of SQL Server Management Studio (SSMS) on your Windows system.
+ 
+## Last and Final Step. Updating the Database (for both Windows and Mac Users)
+
+To update the database schema, follow these steps in your terminal:
+
+1. **Open the Terminal**:
+   - Open a terminal window on your computer.
+
+2. **Navigate to the Repository Directory**:
+   - Use the `cd` command to navigate to the directory where you cloned the GitHub repository. For example:
+     ```bash
+     cd path/to/SacredBondClone
+     ```
+
+3. **Navigate to SacredBond.Core Directory**:
+   - Within the "SacredBondClone" directory, navigate to the "SacredBond.Core" directory using the `cd` command. For example:
+     ```bash
+     cd SacredBond.Core
+     ```
+
+4. **Run the Database Update Command**:
+   - Run the following command to update the database schema (ensure you have the necessary Entity Framework Core tools installed):
+     ```bash
+     dotnet ef database update --startup-project ../SacredBond.App/
+     ```
+
+   This command will apply any pending migrations and update the database to match your project's schema.
+
+Make sure to perform these steps after making any changes to your Entity Framework Core migrations or database schema.
+
 
 
