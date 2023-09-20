@@ -82,18 +82,6 @@ This guide provides step-by-step instructions for setting up SQL Server, SQL Ser
 3. **Connect to the Database Engine**:
    - Click the "Connect" button. If the connection is successful, you will be connected to the SQL Server Database Engine.
 
-### Configuring Connection Strings in Projects
-
-To configure connection strings in your projects:
-
-- **SacredBond.App**:
-   - Open the `appsettings.Development.json` file in the "SacredBond.App" project.
-   - Update the connection string to match the one you used to connect to your local SQL Server instance. Replace `[YourConnectionString]` with the actual connection string.
-
-- **SacredBondFaker**:
-   - Open the `appsettings.json` file in the "SacredBondFaker" project.
-   - Update the connection string to match the one you used to connect to your local SQL Server instance. Replace `[YourConnectionString]` with the actual connection string.
-
 ## Third Step SQL Server Set up for Mac Users
 This tutorial applies to all regardless of the processor they have: Intel/M1 and above. This text assumes that you have .NETCore installed because dotnet cli comes packaged with it. Moreover, before reading the rest of the text, make sure to download Docker and Azure Data Studio. 
 
@@ -146,9 +134,29 @@ While Docker is running, Azure Data Studio needs to be running simultaneously as
 7. Leave the other options in their default status, and then connect.
 
 
-## Fourth Step EFCore (Connecting to our SQL Server)
-1. Since we are using a localhost db, make sure to update the connection string that is in your appSettings.Development.json file and set it to this:
-   1. <pre><code>"Server=localhost;Database=[NameOfDatabase];User=sa;Password=[YourPasswordFromDocker];MultipleActiveResultSets=true;Encrypt=false"</code></pre>
-2. Now to add a Migration, we need to make sure we enter the Target Project (the project that contains your DBContext class, which is SacredBond.Core):
-   <pre><code> $ cd ./project_with_migrations_folder
-    $ dotnet ef --startup-project ../my_startup_project_path/ migrations add myMigration01</code></pre>
+## Fourth Step, updating our connection strings to connect to our database:
+To configure connection strings in your projects, follow based on your operating system:
+
+- **SacredBond.App** (for Mac Users):
+   - Open the `**appsettings.Development.json**` file in the **"SacredBond.App"** project.
+   - Update the connection string to match this format for Mac users:
+     ```
+     "Server=localhost;Database=[Name_Of_Choice];User=sa;Password=[Docker_Setup_Password];MultipleActiveResultSets=true;Encrypt=false"
+     ```
+
+- **SacredBondFaker** (for Mac Users):
+   - Open the `**appsettings.json`** file in the **"SacredBondFaker**" project.
+   - Update the connection string to match this format for Mac users:
+     ```
+     "Server=localhost;Database=[Name_Of_Choice];User=sa;Password=[Docker_Setup_Password];MultipleActiveResultSets=true;Encrypt=false"
+     ```
+
+- **SacredBond.App** (for Windows Users):
+   - Open the **`appsettings.Development.json`** file in the **"SacredBond.App"** project.
+   - Use the connection string provided during the installation of SQL Server Management Studio (SSMS) on your Windows system.
+
+- **SacredBondFaker** (for Windows Users):
+   - Open the `**appsettings.json`** file in the **"SacredBondFaker"** project.
+   - Use the connection string provided during the installation of SQL Server Management Studio (SSMS) on your Windows system.
+
+
